@@ -7,6 +7,14 @@ return {
 			columns = {
 				'icon',
 			},
+			delete_to_trash = true,
+			skip_confirm_for_simple_edits = true,
+			view_options = {
+				show_hidden = true,
+				is_always_hidden = function(name, _)
+					return vim.tbl_contains({ '.git' }, name) or vim.endswith(name, 'cache')
+				end,
+			},
 		})
 	end,
 }
