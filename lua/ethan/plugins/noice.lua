@@ -1,9 +1,9 @@
 return {
     'folke/noice.nvim',
     event = 'VeryLazy',
-    opts = require('ethan.configs.noice').opts,
     dependencies = {
         'MunifTanjim/nui.nvim',
         'rcarriga/nvim-notify',
     },
+    config = require('ethan.configs.noice').setup,
 }

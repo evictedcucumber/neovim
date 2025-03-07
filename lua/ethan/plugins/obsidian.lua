@@ -1,6 +1,6 @@
 return {
     'epwalsh/obsidian.nvim',
-    version = 'v3.7.10',
+    version = 'v3.7.12',
     lazy = true,
     event = {
         'BufReadPre ' .. vim.fn.expand('~') .. '/Documents/obsidian-vaults/**.md',
@@ -9,5 +9,5 @@ return {
     dependencies = {
         'nvim-lua/plenary.nvim',
     },
-    opts = require('ethan.configs.obsidian').opts,
+    config = require('ethan.configs.obsidian').setup,
 }

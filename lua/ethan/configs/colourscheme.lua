@@ -1,65 +1,63 @@
 local M = {}
 
-M.opts = {
-    flavour = 'mocha',
-    background = {
-        light = 'mocha',
-        dark = 'mocha',
-    },
-    transparent_background = true,
-    show_end_of_buffer = true,
-    term_colors = true,
-    integrations = {
-        markdown = true,
-        fidget = true,
-        cmp = true,
-        treesitter = true,
-        treesitter_context = true,
-        harpoon = true,
-        indent_blankline = {
-            enabled = true,
-            scope_color = 'text',
-            colored_indent_levels = false,
+M.setup = function()
+    require('catppuccin').setup({
+        flavour = 'mocha',
+        background = {
+            light = 'mocha',
+            dark = 'mocha',
         },
-        mason = true,
-        mini = {
-            enabled = true,
-            indendscope_color = 'text',
-        },
-        noice = true,
-        dap = true,
-        dap_ui = true,
-        native_lsp = {
-            enabled = true,
-            underlines = {
-                errors = { 'undercurl' },
-                hints = { 'undercurl' },
-                warnings = { 'undercurl' },
-                information = { 'undercurl' },
+        transparent_background = true,
+        show_end_of_buffer = true,
+        term_colors = true,
+        integrations = {
+            markdown = true,
+            fidget = true,
+            cmp = true,
+            treesitter = true,
+            treesitter_context = true,
+            harpoon = true,
+            indent_blankline = {
+                enabled = true,
+                scope_color = 'text',
+                colored_indent_levels = false,
             },
-            inlay_hints = {
-                background = true,
+            mason = true,
+            mini = {
+                enabled = true,
+                indendscope_color = 'text',
             },
+            noice = true,
+            dap = true,
+            dap_ui = true,
+            native_lsp = {
+                enabled = true,
+                underlines = {
+                    errors = { 'undercurl' },
+                    hints = { 'undercurl' },
+                    warnings = { 'undercurl' },
+                    information = { 'undercurl' },
+                },
+                inlay_hints = {
+                    background = true,
+                },
+            },
+            notify = true,
+            telescope = true,
+            which_key = true,
+            lsp_trouble = true,
+            gitsigns = true,
+            flash = true,
         },
-        notify = true,
-        telescope = true,
-        which_key = true,
-        lsp_trouble = true,
-        gitsigns = true,
-        flash = true,
-    },
-}
-
-M.setup = function(_, opts)
-    require('catppuccin').setup(opts)
+    })
 
     vim.cmd.colorscheme('catppuccin')
 
-    local colour = require('catppuccin.palettes').get_palette('mocha').sky
-    vim.cmd('highlight SpellBad guisp=' .. colour)
-    vim.cmd('highlight SpellCap guisp=' .. colour)
-    vim.cmd('highlight SpellRare guisp=' .. colour)
-    vim.cmd('highlight SpellLocal guisp=' .. colour)
+    local palette = require('catppuccin.palettes').get_palette('mocha')
+    vim.cmd('highlight SpellBad guisp=' .. palette.sky)
+    vim.cmd('highlight SpellCap guisp=' .. palette.blue)
+    vim.cmd('highlight SpellRare guisp=' .. palette.teal)
+    vim.cmd('highlight SpellLocal guisp=' .. palette.mantle)
 end
 
 return M
