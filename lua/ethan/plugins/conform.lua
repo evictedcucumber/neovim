@@ -1,5 +1,4 @@
 return {
-	'stevearc/conform.nvim',
-	event = { 'BufReadPre', 'BufNewFile' },
-	opts = require('ethan.config.conform').opts,
+    'stevearc/conform.nvim',
+    opts = require('ethan.configs.conform').opts,
 }

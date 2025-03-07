@@ -1,30 +1,30 @@
-std = 'lua54'
+std = 'lua53'
 
 self = false
 
 cache = true
 
 ignore = {
-	'631',
-	'212/_.*',
-	'214',
-	'121',
-	'122',
-	'581',
+    '631',
+    '212/_.*',
+    '214',
+    '121',
+    '122',
+    '581',
 }
 
 read_globals = {
-	'vim',
+    'vim',
 }
 
 globals = {
-	'vim.g',
-	'vim.b',
-	'vim.w',
-	'vim.o',
-	'vim.bo',
-	'vim.wo',
-	'vim.go',
-	'vim.env',
-	'ethan',
+    'vim.g',
+    'vim.b',
+    'vim.w',
+    'vim.o',
+    'vim.bo',
+    'vim.wo',
+    'vim.go',
+    'vim.env',
+    'ethan',
 }

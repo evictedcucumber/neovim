@@ -1,5 +1,5 @@
 return {
-	'lervag/vimtex',
-	ft = 'tex',
-	init = require('ethan.config.vimtex').init,
+    'lervag/vimtex',
+    ft = 'tex',
+    init = require('ethan.configs.vimtex').init,
 }

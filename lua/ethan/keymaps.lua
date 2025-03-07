@@ -11,10 +11,10 @@ vim.keymap.set('n', '<leader>wsv', '<C-w>v', { desc = '[W]indow [S]plit [V]ertia
 vim.keymap.set('n', '<leader>wsh', '<C-w>s', { desc = '[W]indow [S]plit [H]orizontal' })
 vim.keymap.set('n', '<leader>wsx', '<cmd>close<CR>', { desc = '[W]indow [S]plit Close' })
 vim.keymap.set(
-	'n',
-	'<leader>wsm',
-	'<cmd>MaximizerToggle<CR>',
-	{ desc = '[W]indow [S]plit [M]aximize' }
+    'n',
+    '<leader>wsm',
+    '<cmd>MaximizerToggle<CR>',
+    { desc = '[W]indow [S]plit [M]aximize' }
 )
 
 vim.keymap.set({ 'n', 'v' }, '<leader>y', '"+y', { desc = '[Y]ank to Clipboard' })

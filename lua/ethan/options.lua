@@ -48,9 +48,9 @@ vim.opt.timeout = true
 vim.opt.timeoutlen = 300
 
 vim.api.nvim_create_autocmd('TextYankPost', {
-	desc = 'Highlight when yanking (copying) text',
-	group = vim.api.nvim_create_augroup('ethan-highlight-yank', { clear = true }),
-	callback = function()
-		vim.highlight.on_yank()
-	end,
+    desc = 'Highlight when yanking (copying) text',
+    group = vim.api.nvim_create_augroup('ethan-highlight-yank', { clear = true }),
+    callback = function()
+        vim.highlight.on_yank()
+    end,
 })

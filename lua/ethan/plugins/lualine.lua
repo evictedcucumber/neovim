@@ -1,5 +1,5 @@
 return {
-	'nvim-lualine/lualine.nvim',
-	dependencies = { 'nvim-tree/nvim-web-devicons' },
-	opts = require('ethan.config.lualine').opts,
+    'nvim-lualine/lualine.nvim',
+    dependencies = { 'nvim-tree/nvim-web-devicons' },
+    opts = require('ethan.configs.lualine').opts,
 }

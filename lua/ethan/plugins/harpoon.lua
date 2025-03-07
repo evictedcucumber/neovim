@@ -1,8 +1,8 @@
 return {
-	'ThePrimeagen/harpoon',
-	branch = 'harpoon2',
-	dependencies = {
-		'nvim-lua/plenary.nvim',
-	},
-	config = require('ethan.config.harpoon').setup,
+    'ThePrimeagen/harpoon',
+    branch = 'harpoon2',
+    dependencies = {
+        'nvim-lua/plenary.nvim',
+    },
+    config = require('ethan.configs.harpoon').setup,
 }
