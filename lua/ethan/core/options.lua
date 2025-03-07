@@ -44,6 +44,9 @@ vim.opt.scrolloff = 10
 vim.opt.spelllang = 'en_gb'
 vim.opt.spell = true
 
+vim.opt.timeout = true
+vim.opt.timeoutlen = 300
+
 vim.api.nvim_create_autocmd('TextYankPost', {
 	desc = 'Highlight when yanking (copying) text',
 	group = vim.api.nvim_create_augroup('ethan-highlight-yank', { clear = true }),
