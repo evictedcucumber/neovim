@@ -4,4 +4,5 @@ return {
     'tpope/vim-sleuth',
     { 'lukas-reineke/indent-blankline.nvim', main = 'ibl', opts = {} },
     'szw/vim-maximizer',
+    'RRethy/vim-illuminate',
 }
