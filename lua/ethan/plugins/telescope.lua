@@ -3,8 +3,30 @@ return {
 	branch = '0.1.x',
 	dependencies = {
 		'nvim-lua/plenary.nvim',
-		{ 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
+		{
+			'nvim-telescope/telescope-fzf-native.nvim',
+			build = 'make',
+			cond = function()
+				return vim.fn.executable('make') == 1
+			end,
+		},
+		'nvim-telescope/telescope-ui-select.nvim',
+		'folke/which-key.nvim',
 	},
+	init = function()
+		local builtin = require('telescope.builtin')
+
+		require('which-key').register({
+			['<leader>'] = {
+				s = {
+					f = { builtin.find_files, '[S]earch [F]iles' },
+					k = { builtin.keymaps, '[S]earch [K]eymaps' },
+					g = { builtin.live_grep, 'Live [G]rep' },
+					c = { builtin.grep_string, 'String Under [C]ursor' },
+				},
+			},
+		}, { mode = 'n' })
+	end,
 	config = function()
 		local telescope = require('telescope')
 		local actions = require('telescope.actions')
@@ -27,14 +49,14 @@ return {
 					hidden = true,
 				},
 			},
+			extensions = {
+				['ui-select'] = {
+					require('telescope.themes').get_dropdown(),
+				},
+			},
 		})
 
 		telescope.load_extension('fzf')
-
-		vim.keymap.set('n', '<leader>ff', '<cmd> Telescope find_files <CR>', { desc = 'Find files' })
-		vim.keymap.set('n', '<leader>fr', '<cmd> telescope oldfiles <CR>', { desc = 'Find recent files' })
-		vim.keymap.set('n', '<leader>fss', '<cmd> Telescope live_grep<CR>', { desc = 'Find string by search' })
-		vim.keymap.set('n', '<leader>fsc', '<cmd> Telescope grep_string <CR>', { desc = 'Find string under cursor' })
-		vim.keymap.set('n', '<leader>fh', '<cmd> Telescope help_tags <CR>', { desc = 'Help' })
+		telescope.load_extension('ui-select')
 	end,
 }
