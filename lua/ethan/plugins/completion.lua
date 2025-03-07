@@ -16,6 +16,9 @@ return {
         local lspkind = require('lspkind')
 
         require('luasnip.loaders.from_vscode').lazy_load()
+        require('luasnip.loaders.from_vscode').load_standalone({
+            path = './snippets/markdown.code-snippets',
+        })
 
         cmp.setup({
             completion = {

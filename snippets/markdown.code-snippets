@@ -1,0 +1,14 @@
+{
+  "table header": {
+    "prefix": "1x3table-header",
+    "body": ["| ${1} | ${2} | ${3} |", "| --- | --- | --- |", "${0}"],
+    "description": "Table header with 3 columns",
+    "scope": "markdown",
+  },
+  "table row": {
+    "prefix": "1x3table-row",
+    "body": ["| ${1} | ${2} | ${3} |", "${0}"],
+    "description": "Table row with 3 columns",
+    "scope": "markdown",
+  },
+}
