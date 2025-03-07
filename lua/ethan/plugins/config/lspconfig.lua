@@ -45,57 +45,45 @@ return function()
     )
     local lspconfig = require('lspconfig')
 
-    require('mason-lspconfig').setup({
-        ensure_installed = {
-            'lua_ls',
-            'pyright',
-            'texlab',
-            'cssls',
-        },
-        handlers = {
-            function(server_name)
-                lspconfig[server_name].setup({ capabilities = capabilities })
-            end,
-            ['lua_ls'] = function()
-                lspconfig['lua_ls'].setup({
-                    capabilities = capabilities,
-                    filetypes = { 'lua' },
-                    options = {
-                        Lua = {
-                            diagnostics = {
-                                globals = { 'vim' },
-                                disable = { 'missing-fields' },
-                            },
-                            workspace = {
-                                library = {
-                                    [vim.fn.expand('$VIMRUNTIME/lua')] = true,
-                                    [vim.fn.stdpath('config') .. '/lua'] = true,
-                                },
-                            },
-                            completion = {
-                                callSnippet = 'Replace',
-                            },
+    local servers = {
+        lua_ls = {
+            filetypes = { 'lua' },
+            options = {
+                Lua = {
+                    diagnostics = {
+                        globals = { 'vim' },
+                    },
+                    workspace = {
+                        library = {
+                            [vim.fn.expand('$VIMRUNTIME/lua')] = true,
+                            [vim.fn.stdpath('config') .. '/lua'] = true,
                         },
                     },
-                })
-            end,
-            ['pyright'] = function()
-                lspconfig['pyright'].setup({
-                    capabilities = capabilities,
-                    filetypes = { 'python' },
-                })
-            end,
-            ['texlab'] = function()
-                lspconfig['texlab'].setup({
-                    capabilities = capabilities,
-                    filetypes = { 'tex' },
-                })
-            end,
-            ['cssls'] = function()
-                lspconfig['cssls'].setup({
-                    capabilities = capabilities,
-                    filetypes = { 'css' },
-                })
+                    completion = {
+                        callSnippet = 'Replace',
+                    },
+                },
+            },
+        },
+        pyright = {
+            filetypes = { 'python' },
+        },
+        texlab = {
+            filetypes = { 'tex' },
+        },
+        cssls = {
+            filetypes = { 'css' },
+        },
+    }
+
+    require('mason-lspconfig').setup({
+        ensure_installed = vim.tbl_keys(servers),
+        handlers = {
+            function(server_name)
+                local server_config = servers[server_name] or {}
+
+                server_config.capabilities = capabilities
+                lspconfig[server_name].setup(server_config)
             end,
         },
     })
