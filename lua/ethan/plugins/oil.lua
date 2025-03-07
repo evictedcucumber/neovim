@@ -12,7 +12,8 @@ return {
 			view_options = {
 				show_hidden = true,
 				is_always_hidden = function(name, _)
-					return vim.tbl_contains({ '.git', '.trash' }, name) or vim.endswith(name, 'cache')
+					return vim.tbl_contains({ '.git', '.trash' }, name)
+						or vim.endswith(name, 'cache')
 				end,
 			},
 		})
