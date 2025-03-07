@@ -40,6 +40,15 @@ return function()
         factory = nls_helpers.generator_factory,
     })
 
+    local python_executable = function()
+        local path = os.getenv('VIRTUAL_ENV') or os.getenv('CONDA_PREFIX') or vim.fn.getcwd()
+        path = path .. '/bin/python3'
+        if vim.fn.filereadable(path) == 0 then
+            path = '/usr/bin/python3'
+        end
+        return path
+    end
+
     return {
         sources = {
             -- Formatters
@@ -49,7 +58,12 @@ return function()
             nls.builtins.formatting.prettierd,
             -- Linters
             luacheck,
-            nls.builtins.diagnostics.mypy,
+            nls.builtins.diagnostics.mypy.with({
+                extra_args = {
+                    '--python-executable',
+                    python_executable(),
+                },
+            }),
             require('none-ls.diagnostics.eslint_d'),
         },
         on_attach = function(client, bufnr)
