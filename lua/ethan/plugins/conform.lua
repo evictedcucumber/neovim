@@ -8,6 +8,8 @@ return {
 				lua = { 'stylua' },
 				python = { 'isort', 'black' },
 				tex = { 'latexindent' },
+				css = { 'prettierd' },
+				json = { 'prettierd' },
 				['_'] = { 'trim_whitespace' },
 			},
 			format_on_save = {

@@ -129,6 +129,12 @@ return {
 			texlab = {
 				filetypes = { 'tex' },
 			},
+			cssls = {
+				filetypes = { 'css' },
+			},
+			jsonls = {
+				filetypes = { 'json' },
+			},
 		}
 
 		require('mason').setup({
@@ -149,9 +155,17 @@ return {
 			'black',
 			'mypy',
 			'ruff',
+			'prettierd',
+			'stylelint',
+			'biome',
 		})
 
-		require('mason-tool-installer').setup({ ensure_installed = ensure_installed })
+		require('mason-tool-installer').setup({
+			ensure_installed = ensure_installed,
+			auto_update = true,
+			run_on_start = true,
+			start_delay = 5000,
+		})
 
 		require('mason-lspconfig').setup({
 			handlers = {
