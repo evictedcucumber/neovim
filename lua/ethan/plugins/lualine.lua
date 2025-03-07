@@ -11,7 +11,7 @@ return {
 				lualine_a = { 'mode' },
 				lualine_b = { 'branch' },
 				lualine_c = { 'filename' },
-				lualine_x = { 'diagnostic', 'buffers' },
+				lualine_x = { 'diagnostic' },
 				lualine_y = { 'filetype' },
 				lualine_z = { 'location' },
 			},
