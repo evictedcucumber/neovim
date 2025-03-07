@@ -2,7 +2,9 @@ local M = {}
 
 M.setup = function()
     local telescope = require('telescope')
+    local builtin = require('telescope.builtin')
     local actions = require('telescope.actions')
+    local themes = require('telescope.themes')
     local transform_mod = require('telescope.actions.mt').transform_mod
 
     local trouble = require('trouble')
@@ -46,15 +48,13 @@ M.setup = function()
         },
         extensions = {
             ['ui-select'] = {
-                require('telescope.themes').get_dropdown(),
+                themes.get_dropdown(),
             },
         },
     })
 
     telescope.load_extension('fzf')
     telescope.load_extension('ui-select')
-
-    local builtin = require('telescope.builtin')
     telescope.load_extension('undo')
 
     vim.keymap.set('n', '<leader>sf', builtin.find_files)
@@ -62,6 +62,9 @@ M.setup = function()
     vim.keymap.set('n', '<leader>sg', builtin.live_grep)
     vim.keymap.set('n', '<leader>sc', builtin.grep_string)
     vim.keymap.set('n', '<leader>sh', builtin.help_tags)
+    vim.keymap.set('n', '<leader>/', function()
+        builtin.current_buffer_fuzzy_find(themes.get_dropdown())
+    end)
     vim.keymap.set('n', '<leader>su', '<cmd>Telescope undo<CR>')
 end
 
