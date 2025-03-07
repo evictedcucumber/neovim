@@ -9,15 +9,17 @@ return {
 	config = function()
 		require('nvim-treesitter.configs').setup({
 			auto_install = true,
+			ensure_installed = {
+				'lua',
+				'python',
+				'markdown',
+				'markdown_inline',
+			},
 			highlight = {
 				enable = true,
 			},
 			indent = {
 				enable = true,
-			},
-			ensure_installed = {
-				'lua',
-				'python',
 			},
 			autotag = {
 				enable = true,
