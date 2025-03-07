@@ -66,7 +66,7 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
-require('lazy').setup('ethan.plugins', {
+require('lazy').setup('plugins', {
 	install = {
 		missing = true,
 		colorscheme = { 'catppuccin' },
