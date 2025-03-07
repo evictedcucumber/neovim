@@ -3,10 +3,6 @@ return {
     formatters_by_ft = {
         lua = { 'stylua' },
         python = { 'isort', 'black' },
-        tex = { 'latexindent' },
-        css = { 'prettierd' },
-        json = { 'prettierd' },
-        yaml = { 'prettierd' },
         ['_'] = { 'trim_whitespace' },
     },
     format_on_save = {
