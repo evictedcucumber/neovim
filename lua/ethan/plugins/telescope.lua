@@ -11,6 +11,7 @@ return {
             end,
         },
         'nvim-telescope/telescope-ui-select.nvim',
+        'debugloop/telescope-undo.nvim',
     },
     config = require('ethan.configs.telescope').setup,
 }
