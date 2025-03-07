@@ -1,5 +1,6 @@
 return {
     'nvim-lualine/lualine.nvim',
     dependencies = { 'nvim-tree/nvim-web-devicons' },
-    config = require('ethan.configs.lualine').setup,
+    event = 'VimEnter',
+    opts = require('ethan.plugins.opts.lualine'),
 }

@@ -1,4 +1,5 @@
 return {
     'stevearc/conform.nvim',
-    opts = require('ethan.configs.conform').opts,
+    event = 'BufReadPost',
+    opts = require('ethan.plugins.opts.conform'),
 }

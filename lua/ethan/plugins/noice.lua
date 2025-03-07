@@ -5,5 +5,5 @@ return {
         'rcarriga/nvim-notify',
     },
     event = 'VeryLazy',
-    config = require('ethan.configs.noice').setup,
+    opts = require('ethan.plugins.opts.noice'),
 }

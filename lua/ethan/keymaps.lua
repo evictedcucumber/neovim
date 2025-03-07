@@ -10,12 +10,6 @@ vim.keymap.set('i', 'jj', '<ESC>')
 vim.keymap.set('n', '<leader>wsv', '<C-w>v', { desc = 'Window Split Vertial' })
 vim.keymap.set('n', '<leader>wsh', '<C-w>s', { desc = 'Window Split Horizontal' })
 vim.keymap.set('n', '<leader>wsx', '<cmd>close<CR>', { desc = 'Window Split Close' })
-vim.keymap.set(
-    'n',
-    '<leader>wsm',
-    '<cmd>MaximizerToggle<CR>',
-    { desc = 'Window Split Toggle Maximize' }
-)
 
 vim.keymap.set({ 'n', 'v' }, '<leader>y', '"+y', { desc = 'Yank to Clipboard' })
 vim.keymap.set({ 'n', 'v' }, '<leader>p', '"+p', { desc = 'Paste from Clipboard' })

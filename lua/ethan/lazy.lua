@@ -5,11 +5,7 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
-require('lazy').setup({
-    { import = 'ethan.plugins' },
-    { import = 'ethan.plugins.lsp' },
-    { import = 'ethan.plugins.debug' },
-}, {
+require('lazy').setup('ethan.plugins', {
     install = {
         missing = true,
         colorscheme = { 'catppuccin' },
@@ -23,12 +19,3 @@ require('lazy').setup({
         notify = false,
     },
 })
-
--- vim.api.nvim_create_autocmd('VimEnter', {
---     group = vim.api.nvim_create_augroup('lazyvim_autoupdate', { clear = true }),
---     callback = function()
---         if require('lazy.status').has_updates then
---             require('lazy').update({ show = false })
---         end
---     end,
--- })

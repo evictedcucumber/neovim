@@ -4,5 +4,6 @@ return {
     dependencies = {
         'nvim-lua/plenary.nvim',
     },
-    config = require('ethan.configs.harpoon').setup,
+    event = 'VimEnter',
+    config = require('ethan.plugins.config.harpoon'),
 }
