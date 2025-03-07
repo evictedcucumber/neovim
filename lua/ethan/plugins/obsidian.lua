@@ -1,8 +1,8 @@
 return {
     'epwalsh/obsidian.nvim',
     event = {
-        'BufReadPre ' .. vim.fn.expand('~') .. '/Documents/obsidian-vaults/**.md',
-        'BufNewFile ' .. vim.fn.expand('~') .. '/Documents/obsidian-vaults/**.md',
+        'BufReadPre ' .. vim.fn.expand('~') .. '/Documents/Obsidian Vault/**.md',
+        'BufNewFile ' .. vim.fn.expand('~') .. '/Documents/Obsidian Vault/**.md',
     },
     dependencies = {
         'nvim-lua/plenary.nvim',
@@ -12,7 +12,7 @@ return {
         workspaces = {
             {
                 name = 'Personal',
-                path = vim.fn.expand('~') .. '/Documents/obsidian-vaults/Personal Vault',
+                path = vim.fn.expand('~') .. '/Documents/Obsidian Vault',
                 strict = true,
             },
         },
