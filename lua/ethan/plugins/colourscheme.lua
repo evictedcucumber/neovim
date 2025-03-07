@@ -2,57 +2,58 @@ return {
 	'catppuccin/nvim',
 	name = 'catppuccin',
 	priority = 1000,
-	opt = {
-		flavour = 'mocha',
-		background = {
-			light = 'mocha',
-			dark = 'mocha',
-		},
-		transparent_background = false,
-		show_end_of_buffer = true,
-		term_colors = true,
-		integrations = {
-			cmp = true,
-			treesitter = true,
-			harpoon = true,
-			indent_blankline = {
-				enabled = true,
-				scope_color = 'text',
-				colored_indent_levels = false,
-			},
-			mason = true,
-			mini = {
-				enabled = true,
-				indendscope_color = 'text',
-			},
-			noice = true,
-			dap = true,
-			dap_ui = true,
-			native_lsp = {
-				enabled = true,
-				virtual_text = {
-					errors = { 'italic' },
-					hints = { 'italic' },
-					warnings = { 'italic' },
-					information = { 'italic' },
-				},
-				underlines = {
-					errors = { 'undercurl' },
-					warnings = { 'undercurl' },
-					information = { 'undercurl' },
-					hints = { 'undercurl' },
-				},
-				inlay_hints = {
-					background = true,
-				},
-			},
-			notify = true,
-			telescope = true,
-			which_key = true,
-			lsp_trouble = true,
-		},
-	},
 	config = function()
+		require('catppuccin').setup({
+			flavour = 'mocha',
+			background = {
+				light = 'mocha',
+				dark = 'mocha',
+			},
+			transparent_background = false,
+			show_end_of_buffer = true,
+			term_colors = true,
+			integrations = {
+				cmp = true,
+				treesitter = true,
+				harpoon = true,
+				indent_blankline = {
+					enabled = true,
+					scope_color = 'text',
+					colored_indent_levels = false,
+				},
+				mason = true,
+				mini = {
+					enabled = true,
+					indendscope_color = 'text',
+				},
+				noice = true,
+				dap = true,
+				dap_ui = true,
+				native_lsp = {
+					enabled = true,
+					underlines = {
+						errors = { 'undercurl' },
+						hints = { 'undercurl' },
+						warnings = { 'undercurl' },
+						information = { 'undercurl' },
+					},
+					inlay_hints = {
+						background = true,
+					},
+				},
+				notify = true,
+				telescope = true,
+				which_key = true,
+				lsp_trouble = true,
+			},
+		})
+
 		vim.cmd.colorscheme('catppuccin')
+
+		local colour = require('catppuccin.palettes').get_palette('mocha').sky
+		vim.cmd('highlight SpellBad guisp=' .. colour)
+		vim.cmd('highlight SpellCap guisp=' .. colour)
+		vim.cmd('highlight SpellRare guisp=' .. colour)
+		vim.cmd('highlight SpellLocal guisp=' .. colour)
 	end,
 }

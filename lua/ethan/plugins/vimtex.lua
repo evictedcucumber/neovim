@@ -1,6 +1,6 @@
 return {
 	'lervag/vimtex',
-	filetype = 'tex',
+	ft = 'tex',
 	init = function()
 		vim.g['tex_flavor'] = 'latex'
 		vim.g['vimtex_format_enabled'] = 1

@@ -8,7 +8,6 @@ return {
 				lua = { 'stylua' },
 				python = { 'isort', 'black' },
 				tex = { 'latexindent' },
-				['*'] = { 'cspell' },
 				['_'] = { 'trim_whitespace' },
 			},
 			format_on_save = {
