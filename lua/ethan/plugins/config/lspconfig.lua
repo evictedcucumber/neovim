@@ -91,6 +91,9 @@ return function()
         pyright = {
             filetypes = { 'python' },
         },
+        ruff_lsp = {
+            filetypes = { 'python' },
+        },
         tsserver = {
             filetypes = { 'javascript', 'typescript', 'javascriptreact', 'typescriptreact' },
         },

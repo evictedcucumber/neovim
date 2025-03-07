@@ -8,7 +8,6 @@ return {
         -- Linters
         'luacheck',
         'mypy',
-        'ruff',
         'eslint_d',
         'stylelint',
     },
