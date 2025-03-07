@@ -11,7 +11,12 @@ return {
             lualine_a = { 'mode' },
             lualine_b = { 'branch' },
             lualine_c = { 'filename' },
-            lualine_x = {},
+            lualine_x = {
+                {
+                    require('noice').api.statusline.mode.get,
+                    cond = require('noice').api.statusline.mode.has,
+                },
+            },
             lualine_y = { 'filetype' },
             lualine_z = { 'location' },
         },
