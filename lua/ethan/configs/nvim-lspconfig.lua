@@ -40,76 +40,64 @@ M.setup = function()
         group = vim.api.nvim_create_augroup('EthanLspConfig', {}),
         callback = function(event)
             local trouble = require('trouble')
-            local telescope = require('telescope.builtin')
 
-            require('which-key').register({
-                g = {
-                    d = {
-                        function()
-                            trouble.toggle('lsp_definitions')
-                        end,
-                        'Goto Definition',
-                    },
-                    r = {
-                        function()
-                            trouble.toggle('lsp_references')
-                        end,
-                        'Goto References',
-                    },
-                    i = { telescope.lsp_implementations, 'Goto Implementation' },
-                    t = {
-                        function()
-                            trouble.toggle('lsp_type_definitions')
-                        end,
-                        'Goto Type Definition',
-                    },
-                    D = { vim.lsp.buf.declaration, 'Goto Declaration' },
-                },
-                ['<leader>'] = {
-                    S = {
-                        name = 'symbols',
-                        d = { telescope.lsp_document_symbols, 'Document Symbols' },
-                        w = { telescope.lsp_dynamic_workspace_symbols, 'Workspace Symbols' },
-                    },
-                    ['rn'] = { vim.lsp.buf.rename, 'Rename' },
-                    ['ca'] = { vim.lsp.buf.code_action, 'Code Action' },
-                    x = {
-                        name = 'trouble',
-                        x = {
-                            function()
-                                trouble.toggle()
-                            end,
-                            'Toggle Trouble',
-                        },
-                        q = {
-                            function()
-                                trouble.toggle('quickfix')
-                            end,
-                            'Toggle Quickfix',
-                        },
-                        l = {
-                            function()
-                                trouble.toggle('loclist')
-                            end,
-                            'Toggle Location List',
-                        },
-                        w = {
-                            function()
-                                trouble.toggle('workspace_diagnostics')
-                            end,
-                            'Toggle Workspace Diagnostics',
-                        },
-                        d = {
-                            function()
-                                trouble.toggle('document_diagnostics')
-                            end,
-                            'Toggle Document Diagnostics',
-                        },
-                    },
-                },
-                ['[d'] = { vim.diagnostic.goto_prev, 'Goto Previous Diagnostic Message' },
-                [']d'] = { vim.diagnostic.goto_next, 'Goto Next Diagnostic Message' },
-            }, { buffer = event.buf, silent = true, mode = 'n' })
+            vim.keymap.set('n', 'gd', function()
+                trouble.toggle('lsp_definitions')
+            end, { buffer = event.buf, desc = 'Goto Definition' })
+            vim.keymap.set('n', 'gr', function()
+                trouble.toggle('lsp_references')
+            end, { buffer = event.buf, desc = 'Goto References' })
+            vim.keymap.set('n', '<leader>vws', function()
+                trouble.toggle('lsp_document_symbols')
+            end, { buffer = event.buf, desc = 'View Document Symbols' })
+            vim.keymap.set(
+                'n',
+                '<leader>rn',
+                vim.lsp.buf.rename,
+                { buffer = event.buf, desc = 'Rename' }
+            )
+            vim.keymap.set(
+                'n',
+                '<leader>ca',
+                vim.lsp.buf.code_action,
+                { buffer = event.buf, desc = 'Code Actions' }
+            )
+            vim.keymap.set(
+                'n',
+                '[d',
+                vim.diagnostic.goto_prev,
+                { buffer = event.buf, desc = 'Goto Previous Diagnostic Message' }
+            )
+            vim.keymap.set(
+                'n',
+                ']d',
+                vim.diagnostic.goto_next,
+                { buffer = event.buf, desc = 'Goto Next Diagnostic Message' }
+            )
+            vim.keymap.set(
+                'n',
+                'K',
+                vim.lsp.buf.hover,
+                { buffer = event.buf, desc = 'Show Hover Documentation' }
+            )
+            vim.keymap.set(
+                'i',
+                '<C-h>',
+                vim.lsp.buf.signature_help,
+                { buffer = event.buf, desc = 'Show Signature Help' }
+            )
+            vim.keymap.set(
+                'n',
+                '<leader>tt',
+                trouble.toggle,
+                { buffer = event.buf, desc = 'Toggle Trouble' }
+            )
+            vim.keymap.set('n', '[t', function()
+                trouble.next({ skip_groups = true, jump = true })
+            end, { buffer = event.buf, desc = 'Goto Next Trouble Item' })
+            vim.keymap.set('n', ']t', function()
+                trouble.previous({ skip_groups = true, jump = true })
+            end, { buffer = event.buf, desc = 'Goto Previous Trouble Item' })
 
             local client = vim.lsp.get_client_by_id(event.data.client_id)
             if client and client.server_capabilities.documentHighlightProvider then
@@ -126,9 +114,12 @@ M.setup = function()
         end,
     })
 
-    local capabilities = vim.lsp.protocol.make_client_capabilities()
-    capabilities =
-        vim.tbl_deep_extend('force', capabilities, require('cmp_nvim_lsp').default_capabilities())
+    local capabilities = vim.tbl_deep_extend(
+        'force',
+        {},
+        vim.lsp.protocol.make_client_capabilities(),
+        require('cmp_nvim_lsp').default_capabilities()
+    )
 
     require('mason-lspconfig').setup_handlers({
         function(server_name)

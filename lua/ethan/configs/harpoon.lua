@@ -5,59 +5,31 @@ M.setup = function()
 
     harpoon:setup()
 
-    require('which-key').register({
-        a = {
-            function()
-                harpoon:list():add()
-            end,
-            'Harpoon Append',
-        },
-        e = {
-            function()
-                harpoon.ui:toggle_quick_menu(harpoon:list())
-            end,
-            'Harpoon Explorer',
-        },
-        ['1'] = {
-            function()
-                harpoon:list():select(1)
-            end,
-            'Harpoon Select Item One',
-        },
-        ['2'] = {
-            function()
-                harpoon:list():select(2)
-            end,
-            'Harpoon Select Item Two',
-        },
-        ['3'] = {
-            function()
-                harpoon:list():select(3)
-            end,
-            'Harpoon Select Item Three',
-        },
-        ['4'] = {
-            function()
-                harpoon:list():select(4)
-            end,
-            'Harpoon Select Item Four',
-        },
-    }, { prefix = '<leader>', mode = 'n' })
+    vim.keymap.set('n', '<leader>a', function()
+        harpoon:list():add()
+    end, { desc = 'Harpoon Append' })
+    vim.keymap.set('n', '<leader>e', function()
+        harpoon.ui:toggle_quick_menu(harpoon:list())
+    end, { desc = 'Harpoon Explorer' })
+    vim.keymap.set('n', '<leader>1', function()
+        harpoon:list():select(1)
+    end, { desc = 'Harpoon Select Item One' })
+    vim.keymap.set('n', '<leader>2', function()
+        harpoon:list():select(2)
+    end, { desc = 'Harpoon Select Item Two' })
+    vim.keymap.set('n', '<leader>3', function()
+        harpoon:list():select(3)
+    end, { desc = 'Harpoon Select Item Three' })
+    vim.keymap.set('n', '<leader>4', function()
+        harpoon:list():select(4)
+    end, { desc = 'Harpoon Select Item Four' })
 
-    require('which-key').register({
-        ['<C-p>'] = {
-            function()
-                harpoon:list():prev()
-            end,
-            'Harpoon Goto Previous Item',
-        },
-        ['<C-n>'] = {
-            function()
-                harpoon:list():next()
-            end,
-            'Harpoon Goto Next Item',
-        },
-    }, { mode = 'n' })
+    vim.keymap.set('n', '<M-p>', function()
+        harpoon:list():prev()
+    end, { desc = 'Harpoon Goto Previous Item' })
+    vim.keymap.set('n', '<M-n>', function()
+        harpoon:list():next()
+    end, { desc = 'Harpoon Goto Next Item' })
 end
 
 return M

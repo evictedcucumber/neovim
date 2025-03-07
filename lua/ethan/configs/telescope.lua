@@ -59,23 +59,15 @@ M.setup = function()
     telescope.load_extension('ui-select')
     telescope.load_extension('undo')
 
-    require('which-key').register({
-        s = {
-            name = 'search',
-            f = { builtin.find_files, 'Find Files' },
-            k = { builtin.keymaps, 'Search Keymaps' },
-            g = { builtin.live_grep, 'Live Grep' },
-            c = { builtin.grep_string, 'Grep String' },
-            h = { builtin.help_tags, 'Search Help Tags' },
-            u = { '<cmd>Telescope undo<CR>', 'Show Undo Tree' },
-        },
-        ['/'] = {
-            function()
-                builtin.current_buffer_fuzzy_find(themes.get_dropdown())
-            end,
-            'Fuzzy Search Buffer',
-        },
-    }, { prefix = '<leader>' })
+    vim.keymap.set('n', '<leader>sf', builtin.find_files, { desc = 'Find Files' })
+    vim.keymap.set('n', '<leader>sk', builtin.keymaps, { desc = 'Search Keymaps' })
+    vim.keymap.set('n', '<leader>sg', builtin.live_grep, { desc = 'Live Grep' })
+    vim.keymap.set('n', '<leader>sc', builtin.grep_string, { desc = 'Grep String' })
+    vim.keymap.set('n', '<leader>sh', builtin.help_tags, { desc = 'Find Help Tags' })
+    vim.keymap.set('n', '<leader>su', '<cmd>Telescope undo<CR>', { desc = 'Show Undo Tree' })
+    vim.keymap.set('n', '<leader>/', function()
+        builtin.current_buffer_fuzzy_find(themes.get_dropdown())
+    end, { desc = 'Fuzzy Search Buffer' })
 end
 
 return M

@@ -5,10 +5,8 @@ M.setup = function()
 
     flash.setup({})
 
-    require('which-key').register({
-        s = { flash.jump, 'Flash Jump' },
-        S = { flash.treesitter, 'Flash Treesitter' },
-    }, { mode = { 'n', 'x', 'o' } })
+    vim.keymap.set({ 'n', 'x', 'o' }, 's', flash.jump, { desc = 'Flash Jump' })
+    vim.keymap.set({ 'n', 'x', 'o' }, 'S', flash.treesitter, { desc = 'Flash Treesitter Search' })
 end
 
 return M

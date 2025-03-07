@@ -15,10 +15,13 @@ M.setup = function()
         ensure_installed = vim.tbl_keys(require('ethan.configs.nvim-lspconfig').servers or {}),
     })
 
-    local tools = {}
-    vim.list_extend(tools, require('ethan.configs.conform').formatters or {})
-    vim.list_extend(tools, require('ethan.configs.nvim-lint').linters or {})
-    vim.list_extend(tools, require('ethan.configs.debug').debuggers or {})
+    local tools = vim.tbl_deep_extend(
+        'force',
+        {},
+        require('ethan.configs.conform').formatters or {},
+        require('ethan.configs.nvim-lint').linters or {},
+        require('ethan.configs.debug').debuggers or {}
+    )
 
     require('mason-tool-installer').setup({
         ensure_installed = tools,
