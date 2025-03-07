@@ -9,7 +9,7 @@ M.setup = function()
     require('ufo').setup({
         ---@diagnostic disable: unused-local
         provider_selector = function(_bufnr, _filetype, _buftype)
-            return { 'treesitter', 'indent' }
+            return { 'lsp', 'indent' }
         end,
     })
 
