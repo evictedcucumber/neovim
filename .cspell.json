@@ -1,0 +1,7 @@
+{
+  "version": "0.2",
+  "language": "en-GB",
+  "dictionaries": ["en_US", "en-gb", "companies", "softwareTerms", "misc", "python", "latex", "css", "filetypes"],
+  "maxNumberOfProblems": 15,
+  "allowCompoundWords": true,
+}
