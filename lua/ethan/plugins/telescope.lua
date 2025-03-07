@@ -3,8 +3,19 @@ return {
 	branch = '0.1.x',
 	dependencies = {
 		'nvim-lua/plenary.nvim',
-		{ 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
+		{
+			'nvim-telescope/telescope-fzf-native.nvim',
+			build = 'make',
+			cond = function()
+				return vim.fn.executable('make') == 1
+			end,
+		},
+		'nvim-telescope/telescope-ui-select.nvim',
+		'folke/which-key.nvim',
 	},
+	init = function()
+		local builtin = require('telescope.builtin')
+
 		require('which-key').register({
 			['<leader>'] = {
 				s = {
@@ -38,9 +49,14 @@ return {
 					hidden = true,
 				},
 			},
+			extensions = {
+				['ui-select'] = {
+					require('telescope.themes').get_dropdown(),
+				},
+			},
 		})
 
 		telescope.load_extension('fzf')
-
+		telescope.load_extension('ui-select')
 	end,
 }
