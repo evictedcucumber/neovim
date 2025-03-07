@@ -46,9 +46,11 @@ return function()
             nls.builtins.formatting.stylua,
             nls.builtins.formatting.isort,
             nls.builtins.formatting.black,
+            nls.builtins.formatting.prettierd,
             -- Linters
             luacheck,
             nls.builtins.diagnostics.mypy,
+            require('none-ls.diagnostics.eslint_d'),
         },
         on_attach = function(client, bufnr)
             if client.supports_method('textDocument/formatting') then

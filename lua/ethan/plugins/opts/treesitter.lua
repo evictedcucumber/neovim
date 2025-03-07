@@ -10,6 +10,9 @@ return {
         'markdown',
         'markdown_inline',
         'python',
+        'typescript',
+        'javascript',
+        'css',
     },
     highlight = {
         enable = true,
