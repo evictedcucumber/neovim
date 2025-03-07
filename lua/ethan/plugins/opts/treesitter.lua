@@ -11,7 +11,9 @@ return {
         'markdown_inline',
         'python',
         'typescript',
+        'typescriptreact',
         'javascript',
+        'javascriptreact',
         'css',
     },
     highlight = {
