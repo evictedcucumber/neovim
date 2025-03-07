@@ -27,10 +27,10 @@ M.setup = function()
         }),
         sources = cmp.config.sources({
             { name = 'nvim_lsp' },
-            { name = 'copilot' },
             { name = 'buffer' },
-            { name = 'path' },
+            { name = 'copilot' },
             { name = 'luasnip' },
+            { name = 'path' },
         }),
         ---@diagnostic disable-next-line: missing-fields
         formatting = {
@@ -40,7 +40,6 @@ M.setup = function()
             }),
         },
     })
-
     cmp.setup.cmdline('/', {
         mapping = cmp.mapping.preset.cmdline(),
         sources = {
