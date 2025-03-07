@@ -49,7 +49,12 @@ return function()
     require('trouble').setup({})
 
     require('fidget').setup({
+        progress = {
+            ignore_done_already = true,
+            ignore_empty_message = true,
+        },
         notification = {
+            override_vim_notify = true,
             window = {
                 winblend = 0,
             },
