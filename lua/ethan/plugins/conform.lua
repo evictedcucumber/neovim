@@ -3,6 +3,7 @@ return {
 	event = { 'BufReadPre', 'BufNewFile' },
 	config = function()
 		require('conform').setup({
+			notify_on_error = false,
 			formatters_by_ft = {
 				lua = { 'stylua' },
 				python = { 'isort', 'black' },
