@@ -2,6 +2,8 @@ std = 'lua51+nvim'
 
 self = false
 
+cache = true
+
 ignore = {
 	'631',
 	'212/_.*',
@@ -24,4 +26,5 @@ globals = {
 	'vim.wo',
 	'vim.go',
 	'vim.env',
+	'ethan',
 }
