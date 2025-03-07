@@ -43,6 +43,8 @@ M.setup = function()
                     '!**/.git/*',
                     '--glob',
                     '!**/.trash/*',
+                    '--glob',
+                    '!**/*.db',
                 },
             },
         },
