@@ -27,12 +27,7 @@ return {
             },
         })
 
-        vim.keymap.set(
-            'n',
-            '<leader><tab>',
-            '<cmd>Oil --float<CR>',
-            { desc = 'Open Floating File Explorer' }
-        )
+        -- KEYMAPS
         vim.keymap.set('n', '-', '<cmd>Oil<CR>', { desc = 'Open File Explorer' })
     end,
 }
