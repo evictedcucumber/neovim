@@ -14,6 +14,8 @@ return {
 			},
 			ensure_installed = {
 				"lua",
+				"python",
+				"toml",
 			},
 		})
 	end,
