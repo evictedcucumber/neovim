@@ -3,8 +3,12 @@ return {
 	name = 'catppuccin',
 	priority = 1000,
 	opt = {
-		flavour = 'frappe',
-		transparent_background = true,
+		flavour = 'mocha',
+		background = {
+			light = 'mocha',
+			dark = 'mocha',
+		},
+		transparent_background = false,
 		show_end_of_buffer = true,
 		term_colors = true,
 		integrations = {
@@ -33,10 +37,10 @@ return {
 					information = { 'italic' },
 				},
 				underlines = {
-					errors = { 'underline' },
-					hints = { 'underline' },
-					warnings = { 'underline' },
-					information = { 'underline' },
+					errors = { 'undercurl' },
+					warnings = { 'undercurl' },
+					information = { 'undercurl' },
+					hints = { 'undercurl' },
 				},
 				inlay_hints = {
 					background = true,

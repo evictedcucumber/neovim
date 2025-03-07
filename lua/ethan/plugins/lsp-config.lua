@@ -3,6 +3,7 @@ return {
 	event = { 'BufReadPre', 'BufNewFile' },
 	dependencies = {
 		{ 'folke/trouble.nvim', dependencies = { 'nvim-tree/nvim-web-devicons' }, opts = {} },
+		{ 'dgagn/diagflow.nvim', event = 'LspAttach', opts = {} },
 		'hrsh7th/cmp-nvim-lsp',
 		{ 'folke/neodev.nvim', opts = {} },
 		{ 'j-hui/fidget.nvim', opts = {} },
@@ -134,7 +135,7 @@ return {
 
 		local ensure_installed = vim.tbl_keys(servers or {})
 		vim.list_extend(ensure_installed, {
-			'codespell',
+			'cspell',
 			'stylua',
 			'luacheck',
 			'isort',
@@ -154,6 +155,10 @@ return {
 					require('lspconfig')[server_name].setup(server)
 				end,
 			},
+		})
+
+		vim.diagnostic.config({
+			underline = true,
 		})
 	end,
 }

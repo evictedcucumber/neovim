@@ -8,7 +8,7 @@ return {
 				lua = { 'stylua' },
 				python = { 'isort', 'black' },
 				tex = { 'latexindent' },
-				['*'] = { 'codespell' },
+				['*'] = { 'cspell' },
 				['_'] = { 'trim_whitespace' },
 			},
 			format_on_save = {
