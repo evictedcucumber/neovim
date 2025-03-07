@@ -20,18 +20,6 @@ return {
 		local dap = require('dap')
 		local dapui = require('dapui')
 
-		require('which-key').register({
-			['<leader>d'] = {
-				name = '[D]ebug',
-				b = { dap.toggle_breakpoint(), '[D]ebug [B]reakpoint' },
-				c = { dap.continue(), '[D]ebug [C]ontinue' },
-				i = { dap.step_into(), '[D]ebug Step [I]nto' },
-				o = { dap.step_over(), '[D]ebug Step [O]ver' },
-				O = { dap.step_out(), '[D]ebug Step [O]ut' },
-				u = { dapui.toggle(), 'Toggle [D]ebug [U]I' },
-			},
-		})
-
 		dapui.setup({
 			icons = { expanded = '▾', collapsed = '▸', current_frame = '*' },
 			controls = {
@@ -45,6 +33,48 @@ return {
 					run_last = '▶▶',
 					terminate = '⏹',
 					disconnect = '⏏',
+				},
+			},
+		})
+
+		require('which-key').register({
+			['<leader>d'] = {
+				name = '[D]ebug',
+				b = {
+					function()
+						dap.toggle_breakpoint()
+					end,
+					'[D]ebug [B]reakpoint',
+				},
+				c = {
+					function()
+						dap.continue()
+					end,
+					'[D]ebug [C]ontinue',
+				},
+				i = {
+					function()
+						dap.step_into()
+					end,
+					'[D]ebug Step [I]nto',
+				},
+				o = {
+					function()
+						dap.step_over()
+					end,
+					'[D]ebug Step [O]ver',
+				},
+				O = {
+					function()
+						dap.step_out()
+					end,
+					'[D]ebug Step [O]ut',
+				},
+				u = {
+					function()
+						dapui.toggle()
+					end,
+					'Toggle [D]ebug [U]I',
 				},
 			},
 		})
