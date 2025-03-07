@@ -75,21 +75,51 @@ return {
             capabilities = capabilities,
             settings = {
                 Lua = {
-                    diagnostics = {
-                        globals = { 'vim' },
-                    },
                     workspace = {
-                        library = {
-                            [vim.fn.expand('$VIMRUNTIME/lua')] = true,
-                            [vim.fn.stdpath('config') .. '/lua'] = true,
-                        },
+                        checkThirdParty = false,
+                    },
+                    codeLens = {
+                        enable = true,
                     },
                     completion = {
                         callSnippet = 'Replace',
                     },
+                    doc = {
+                        privateName = { '^_' },
+                    },
+                    hint = {
+                        enable = true,
+                        setType = false,
+                        paramType = true,
+                        paramName = 'Disable',
+                        semicolon = 'Disable',
+                        arrayIndex = 'Disable',
+                    },
                 },
             },
         })
+
+        lspconfig.clangd.setup({
+            capabilities = {
+                offsetEncoding = { 'utf-16' },
+            },
+            cmd = {
+                'clangd',
+                '--background-index',
+                '--clang-tidy',
+                '--header-insertion=iwyu',
+                '--completion-style=detailed',
+                '--function-arg-placeholders',
+                '--fallback-style=llvm',
+            },
+            init_options = {
+                usePlaceholders = true,
+                completeUnimported = true,
+                clangdFileStatus = true,
+            },
+        })
+
+        lspconfig.cmake.setup({ capabilities = capabilities })
 
         require('trouble').setup({})
 
