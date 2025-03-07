@@ -33,6 +33,15 @@ M.setup = function()
         pickers = {
             find_files = {
                 hidden = true,
+                find_command = {
+                    'rg',
+                    '--files',
+                    '--hidden',
+                    '--glob',
+                    '!**/.git/*',
+                    '--glob',
+                    '!**/.trash/*',
+                },
             },
         },
         extensions = {
@@ -40,7 +49,6 @@ M.setup = function()
                 require('telescope.themes').get_dropdown(),
             },
         },
-        file_ignore_patterns = { '.git/', '.trash' },
     })
 
     telescope.load_extension('fzf')
