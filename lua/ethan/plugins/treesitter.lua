@@ -15,12 +15,6 @@ return {
             'bash',
             'markdown',
             'markdown_inline',
-            'python',
-            'typescript',
-            'tsx',
-            'javascript',
-            'css',
-            'html',
         },
         highlight = {
             enable = true,
