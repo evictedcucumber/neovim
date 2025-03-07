@@ -5,6 +5,7 @@ return {
         local lint = require('lint')
         lint.linters_by_ft = {
             lua = { 'luacheck' },
+            cmake = { 'cmakelint' },
         }
 
         vim.api.nvim_create_autocmd({ 'InsertLeave', 'BufWritePost' }, {
