@@ -14,6 +14,8 @@ return {
         { '<leader>sh', '<cmd>Telescope help_tags<CR>', desc = 'Find Help Tags' },
         { '<leader>su', '<cmd>Telescope undo<CR>', desc = 'Show Undo Tree' },
         { '<leader>/', '<cmd>Telescope current_buffer_fuzzy_find', desc = 'Fuzzy Search Buffer' },
+        { 'gd' },
+        { 'gr' },
     },
     config = function()
         local telescope = require('telescope')
