@@ -23,11 +23,6 @@ return {
 					path = vim.fn.expand('~') .. '/Documents/obsidian-vaults/Varsity Vault',
 					strict = true,
 				},
-				{
-					name = 'Comptia Vault',
-					path = vim.fn.expand('~') .. '/Documents/obsidian-vaults/Comptia Network Plus Vault',
-					strict = true,
-				},
 			},
 			completion = {
 				nvim_cmp = true,
