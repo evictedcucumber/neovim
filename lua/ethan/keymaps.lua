@@ -1,8 +1,6 @@
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
-vim.keymap.set('n', '<leader><tab>', '<cmd>Oil<CR>', { desc = 'Open Oil' })
-
 vim.keymap.set('n', '<ESC>', '<cmd>nohlsearch<CR>')
 
 vim.keymap.set('i', 'jj', '<ESC>')
