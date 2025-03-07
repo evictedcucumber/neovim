@@ -8,7 +8,7 @@ vim.opt.rtp:prepend(lazypath)
 require('lazy').setup('ethan.plugins', {
     install = {
         missing = true,
-        colorscheme = { 'catppuccin' },
+        colorscheme = { 'nord' },
     },
     checker = {
         enabled = true,
