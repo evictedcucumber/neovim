@@ -14,15 +14,13 @@ return {
         'tsx',
         'javascript',
         'css',
+        'html',
     },
     highlight = {
         enable = true,
         use_languagetree = true,
     },
     indent = {
-        enable = true,
-    },
-    autotag = {
         enable = true,
     },
     incremental_selection = {
