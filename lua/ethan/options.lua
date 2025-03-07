@@ -2,6 +2,9 @@ vim.g.have_nerd_font = true
 
 vim.g.python3_host_prog = '/home/ethan/.local/share/pyenv/versions/neovim-venv/bin/python'
 
+vim.g.loaded_perl_provider = 0
+vim.g.loaded_ruby_provider = 0
+
 vim.opt.number = true
 vim.opt.relativenumber = true
 
