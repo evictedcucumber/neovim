@@ -4,5 +4,6 @@ return {
     opts = require('ethan.configs.noice').opts,
     dependencies = {
         'MunifTanjim/nui.nvim',
+        'rcarriga/nvim-notify',
     },
 }

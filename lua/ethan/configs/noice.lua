@@ -12,6 +12,10 @@ M.opts = {
             opts = { skip = true },
         },
     },
+    notify = {
+        enabled = true,
+        view = 'mini',
+    },
     lsp = {
         progress = {
             enabled = false,
@@ -23,6 +27,12 @@ M.opts = {
         message = {
             enabled = false,
         },
+    },
+    messages = {
+        enabled = true,
+        view = 'mini',
+        view_error = 'mini',
+        view_warn = 'mini',
     },
 }
 
