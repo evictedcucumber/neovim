@@ -12,9 +12,6 @@ vim.keymap.set('n', '<leader>wsx', '<cmd>close<CR>', { desc = 'Window Split Clos
 
 vim.keymap.set({ 'n', 'v' }, '<leader>y', '"+y', { desc = 'Yank to Clipboard' })
 vim.keymap.set({ 'n', 'v' }, '<leader>p', '"+p', { desc = 'Paste from Clipboard' })
-
-vim.keymap.set('v', 'J', "<cmd>m '>+1<CR>gv=gv<CR>")
-vim.keymap.set('v', 'K', "<cmd>m '<-2<CR>gv=gv<CR>")
 vim.keymap.set('n', '<leader>Y', '"+Y', { desc = 'Yank Line to Clipboard' })
 
 vim.keymap.set('n', 'J', 'mzJ`z')
