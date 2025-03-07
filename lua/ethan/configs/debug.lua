@@ -1,12 +1,9 @@
 local M = {}
 
 M.setup = function()
+    ---@diagnostic disable: missing-fields
     require('mason-nvim-dap').setup({
-        automatic_installation = true,
         automatic_setup = true,
-        ensure_installed = {
-            'debugpy',
-        },
     })
 
     local dap = require('dap')
@@ -45,6 +42,10 @@ M.setup = function()
     dap.listeners.before.event_terminated['dapui_config'] = dapui.close
     dap.listeners.before.event_exited['dapui_config'] = dapui.close
 end
+
+M.debuggers = {
+    'debugpy',
+}
 
 M.setup_python = function()
     local dap_py = require('dap-python')
