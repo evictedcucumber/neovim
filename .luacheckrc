@@ -1,4 +1,4 @@
-std = 'lua51+nvim'
+std = 'lua54'
 
 self = false
 
