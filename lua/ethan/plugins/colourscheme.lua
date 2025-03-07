@@ -13,6 +13,7 @@ return {
 			show_end_of_buffer = true,
 			term_colors = true,
 			integrations = {
+				fidget = true,
 				cmp = true,
 				treesitter = true,
 				harpoon = true,

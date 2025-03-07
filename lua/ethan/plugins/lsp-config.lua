@@ -5,7 +5,16 @@ return {
 		{ 'folke/trouble.nvim', dependencies = { 'nvim-tree/nvim-web-devicons' }, opts = {} },
 		'hrsh7th/cmp-nvim-lsp',
 		{ 'folke/neodev.nvim', opts = {} },
-		{ 'j-hui/fidget.nvim', opts = {} },
+		{
+			'j-hui/fidget.nvim',
+			opts = {
+				notification = {
+					window = {
+						winblend = 0,
+					},
+				},
+			},
+		},
 		'williamboman/mason.nvim',
 		'williamboman/mason-lspconfig.nvim',
 		'WhoIsSethDaniel/mason-tool-installer.nvim',
