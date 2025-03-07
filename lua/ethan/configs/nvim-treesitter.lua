@@ -5,10 +5,13 @@ M.opts = {
     sync_install = true,
     ignore_install = {},
     ensure_installed = {
+        'vim',
+        'regex',
         'lua',
-        'python',
+        'bash',
         'markdown',
         'markdown_inline',
+        'python',
     },
     highlight = {
         enable = true,
