@@ -1,5 +1,7 @@
 vim.g.have_nerd_font = true
 
+vim.g.python3_host_prog = '/home/ethan/.local/share/pyenv/versions/neovim-venv/bin/python'
+
 vim.opt.number = true
 vim.opt.relativenumber = true
 
