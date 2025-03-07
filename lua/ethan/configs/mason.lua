@@ -23,7 +23,7 @@ M.setup = function(_, opts)
 
     require('mason-tool-installer').setup({
         ensure_installed = tools,
-        auto_update = true,
+        auto_update = false,
         run_on_start = true,
         start_delay = 5000,
     })
