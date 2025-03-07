@@ -8,7 +8,7 @@ repos:
     rev: v0.20.0
     hooks:
       - id: stylua
-  - repo: https://github.com/rwxcorp/pre-commit-lua.git
+  - repo: https://github.com/Calinou/pre-commit-luacheck
     rev: v1.0.0
     hooks:
       - id: luacheck
