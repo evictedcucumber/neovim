@@ -18,6 +18,14 @@ M.setup = function()
             lint.try_lint()
         end,
     })
+
+    lint.linters.mypy.args = {
+        '--python-executable',
+        function()
+            local path = os.getenv('VIRTUAL_ENV') or os.getenv('CONDA_PREFIX') or '/usr'
+            return path .. '/bin/python3'
+        end,
+    }
 end
 
 M.linters = {
