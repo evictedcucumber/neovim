@@ -1,1 +1,5 @@
-return { 'echasnovski/mini.move', event = { 'BufReadPre', 'BufNewFile' }, config = true }
+return {
+    'echasnovski/mini.move',
+    event = { 'BufReadPre', 'BufNewFile' },
+    config = true,
+}

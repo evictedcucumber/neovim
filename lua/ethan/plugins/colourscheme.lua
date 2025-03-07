@@ -1,8 +1,12 @@
 return {
-    'catppuccin/nvim',
-    name = 'catppuccin',
+    'folke/tokyonight.nvim',
+    name = 'tokyonight',
     lazy = false,
     priority = 1000,
-    init = require('ethan.plugins.init.colourscheme'),
-    opts = require('ethan.plugins.opts.colourscheme'),
+    init = function()
+        vim.cmd.colorscheme('tokyonight')
+    end,
+    opts = {
+        style = 'night',
+    },
 }

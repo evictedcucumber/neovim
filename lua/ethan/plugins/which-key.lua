@@ -1,5 +1,5 @@
 return {
-    'stevearc/dressing.nvim',
+    'folke/which-key.nvim',
     event = 'VeryLazy',
     config = true,
 }

@@ -1,4 +1,5 @@
 return {
-    'tpope/vim-sleuth',
+    'echasnovski/mini.cursorword',
     event = { 'BufReadPre', 'BufNewFile' },
+    config = true,
 }

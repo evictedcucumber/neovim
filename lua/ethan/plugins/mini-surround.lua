@@ -1,5 +1,5 @@
 return {
     'echasnovski/mini.surround',
-    event = 'InsertEnter',
+    event = { 'BufReadPre', 'BufNewFile' },
     config = true,
 }

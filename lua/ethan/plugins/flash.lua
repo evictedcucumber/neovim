@@ -1,31 +1,26 @@
 return {
     'folke/flash.nvim',
-    event = 'VeryLazy',
-    opts = {},
-    keys = {
-        {
+    keys = { { 'm' }, { 'M' }, { '<C-m>' } },
+    config = function()
+        local flash = require('flash')
+
+        vim.keymap.set(
+            { 'n', 'o', 'x' },
             'm',
-            function()
-                require('flash').jump()
-            end,
-            mode = { 'n', 'o', 'x' },
-            desc = 'Flash Jump',
-        },
-        {
+            flash.jump,
+            { noremap = true, silent = true, desc = 'Flash Jump' }
+        )
+        vim.keymap.set(
+            { 'n', 'o', 'x' },
             'M',
-            function()
-                require('flash').treesitter()
-            end,
-            mode = { 'n', 'o', 'x' },
-            desc = 'Flash Treesitter',
-        },
-        {
+            flash.treesitter,
+            { noremap = true, silent = true, desc = 'Flash Treesitter' }
+        )
+        vim.keymap.set(
+            { 'c' },
             '<C-m>',
-            function()
-                require('flash').toggle()
-            end,
-            mode = { 'c' },
-            desc = 'Flash Toggle',
-        },
-    },
+            flash.toggle,
+            { noremap = true, silent = true, desc = 'Flash Toggle' }
+        )
+    end,
 }
