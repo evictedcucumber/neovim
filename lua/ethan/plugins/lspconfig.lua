@@ -4,7 +4,7 @@ return {
         { 'folke/trouble.nvim', dependencies = { 'nvim-tree/nvim-web-devicons' } },
         'hrsh7th/cmp-nvim-lsp',
         'j-hui/fidget.nvim',
-        { 'folke/neodev.nvim', opts = {} },
+        { 'folke/neodev.nvim', opts = { library = { plugins = { 'neotest' }, types = true } } },
         'williamboman/mason-lspconfig.nvim',
     },
     config = require('ethan.plugins.config.lspconfig'),
