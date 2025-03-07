@@ -8,7 +8,9 @@ return {
         -- Linters
         'luacheck',
         'mypy',
+        'ruff',
         'eslint_d',
+        'stylelint',
     },
     auto_update = true,
     run_on_start = true,
