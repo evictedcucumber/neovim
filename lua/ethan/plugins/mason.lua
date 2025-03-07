@@ -18,6 +18,7 @@ return {
             'stylelint-lsp',
             'tailwindcss-language-server',
             'typescript-language-server',
+            'rust-analyzer',
             -- Formatters
             'prettierd',
             'stylua',

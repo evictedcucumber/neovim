@@ -128,6 +128,12 @@ return {
             capabilities = capabilities,
         })
 
+        lspconfig.rust_analyzer.setup({
+            capabilities = capabilities,
+            filetypes = { 'rust' },
+            root_dir = require('lspconfig/util').root_pattern('Cargo.toml'),
+        })
+
         require('trouble').setup({})
 
         require('fidget').setup({
