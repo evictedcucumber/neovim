@@ -5,7 +5,6 @@ return {
 		'TmuxNavigateDown',
 		'TmuxNavigateUp',
 		'TmuxNavigateRight',
-		'TmuxNavigatePreviouse',
 	},
 	keys = {
 		{ '<M-h>', '<cmd><C-U>TmuxNavigateLeft<cr>' },
