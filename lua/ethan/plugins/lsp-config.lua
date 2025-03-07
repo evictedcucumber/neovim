@@ -2,99 +2,74 @@ return {
 	'neovim/nvim-lspconfig',
 	event = { 'BufReadPre', 'BufNewFile' },
 	dependencies = {
+		{ 'folke/trouble.nvim', dependencies = { 'nvim-tree/nvim-web-devicons' }, opts = {} },
 		'hrsh7th/cmp-nvim-lsp',
 		{ 'folke/neodev.nvim', opts = {} },
 		{ 'j-hui/fidget.nvim', opts = {} },
+		'williamboman/mason.nvim',
+		'williamboman/mason-lspconfig.nvim',
+		'WhoIsSethDaniel/mason-tool-installer.nvim',
 	},
 	config = function()
-		local mason_lspconfig = require('mason-lspconfig')
-
 		vim.api.nvim_create_autocmd('LspAttach', {
 			group = vim.api.nvim_create_augroup('EthanLspConfig', {}),
 			callback = function(event)
-				vim.keymap.set(
-					'n',
-					'gR',
-					'<cmd>Telescope lsp_references<CR>',
-					{ desc = 'Show LSP References', buffer = event.buf, silent = true }
-				)
+				local map = function(keys, func, desc)
+					vim.keymap.set('n', keys, func, { desc = 'LSP: ' .. desc, buffer = event.buf, silent = true })
+				end
 
-				vim.keymap.set(
-					'n',
-					'gD',
-					vim.lsp.buf.declaration,
-					{ desc = 'Goto Delcaration', buffer = event.buf, silent = true }
-				)
+				local trouble = require('trouble')
+				local telescope = require('telescope.builtin')
 
-				vim.keymap.set(
-					'n',
-					'gd',
-					'<cmd>Telescope lsp_definitions<CR>',
-					{ desc = 'Show LSP Definitions', buffer = event.buf, silent = true }
-				)
+				map('gd', function()
+					trouble.toggle('lsp_definitions')
+				end, '[G]oto [D]efinition')
 
-				vim.keymap.set(
-					'n',
-					'gi',
-					'<cmd>Telescope lsp_implementations<CR>',
-					{ desc = 'Show LSP Implementations', buffer = event.buf, silent = true }
-				)
+				map('gr', function()
+					trouble.toggle('lsp_references')
+				end, '[G]oto [R]eferences')
 
-				vim.keymap.set(
-					'n',
-					'gt',
-					'<cmd>Telescope lsp_type_definitions<CR>',
-					{ desc = 'Show LSP Type Definitions', buffer = event.buf, silent = true }
-				)
+				map('gi', telescope.lsp_implementations, '[G]oto [I]mplementation')
 
-				vim.keymap.set(
-					{ 'n', 'v' },
-					'<leader>ca',
-					vim.lsp.buf.code_action,
-					{ desc = 'View [C]ode [A]ctions', buffer = event.buf, silent = true }
-				)
+				map('gt', function()
+					trouble.toggle('lsp_type_definitions')
+				end, 'Type [D]efinition')
 
-				vim.keymap.set(
-					'n',
-					'<leader>rn',
-					vim.lsp.buf.rename,
-					{ desc = '[R]e[n]ame', buffer = event.buf, silent = true }
-				)
+				map('<leader>ds', telescope.lsp_document_symbols, '[D]ocument [S]ymbols')
 
-				vim.keymap.set(
-					'n',
-					'<leader>D',
-					'<cmd>Telescope diagnostics bufnr=0<CR>',
-					{ desc = 'View Buffer [D]iagnostics', buffer = event.buf, silent = true }
-				)
+				map('<leader>wS', telescope.lsp_dynamic_workspace_symbols, '[W]orkspace [S]ymbols')
 
-				vim.keymap.set(
-					'n',
-					'<leader>d',
-					vim.diagnostic.open_float,
-					{ desc = 'View Line [D]iagnostics', buffer = event.buf, silent = true }
-				)
+				map('<leader>rn', vim.lsp.buf.rename, '[R]e[n]ame')
 
-				vim.keymap.set(
-					'n',
-					'[d',
-					vim.diagnostic.goto_prev,
-					{ desc = 'Previous [D]iagnostic', buffer = event.buf, silent = true }
-				)
+				map('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction')
 
-				vim.keymap.set(
-					'n',
-					']d',
-					vim.diagnostic.goto_next,
-					{ desc = 'Next [D]iagnostic', buffer = event.buf, silent = true }
-				)
+				map('K', vim.lsp.buf.hover, 'Hover Documentation')
 
-				vim.keymap.set(
-					'n',
-					'K',
-					vim.lsp.buf.hover,
-					{ desc = 'View Documentation', buffer = event.buf, silent = true }
-				)
+				map('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
+
+				map('<leader>xx', function()
+					trouble.toggle()
+				end, 'Toggle Trouble')
+
+				map('<leader>xq', function()
+					trouble.toggle('quickfix')
+				end, 'Toggle [Q]uickfix List')
+
+				map('<leader>xl', function()
+					trouble.toggle('loclist')
+				end, 'Toggle [L]ocation List')
+
+				map('<leader>xw', function()
+					trouble.toggle('workspace_diagnostics')
+				end, 'Toggle [W]orkspace Diagnostics')
+
+				map('<leader>xd', function()
+					trouble.toggle('document_diagnostics')
+				end, 'Toggle [D]ocument Diagnostics')
+
+				map('[d', vim.diagnostic.goto_prev, 'Goto Previous [D]iagnostic Message')
+
+				map(']d', vim.diagnostic.goto_next, 'Goto Next [D]iagnostic Message')
 
 				local client = vim.lsp.get_client_by_id(event.data.client_id)
 				if client and client.server_capabilities.documentHighlightProvider then
@@ -126,6 +101,7 @@ return {
 				Lua = {
 					diagnostics = {
 						globals = { 'vim' },
+						disable = { 'missing-fields' },
 					},
 					workspace = {
 						library = {
@@ -143,13 +119,38 @@ return {
 			},
 		}
 
-		mason_lspconfig.setup_handlers({
-			function(server_name)
-				local server = servers[server_name] or {}
+		require('mason').setup({
+			ui = {
+				icons = {
+					package_installed = '✓',
+					package_pending = '➜',
+					package_uninstalled = '✗',
+				},
+			},
+		})
 
-				server.capabilities = vim.tbl_deep_extend('force', capabilities, server.capabilities or {})
-				require('lspconfig')[server_name].setup(server)
-			end,
+		local ensure_installed = vim.tbl_keys(servers or {})
+		vim.list_extend(ensure_installed, {
+			'codespell',
+			'stylua',
+			'luacheck',
+			'isort',
+			'black',
+			'mypy',
+			'ruff',
+		})
+
+		require('mason-tool-installer').setup({ ensure_installed = ensure_installed })
+
+		require('mason-lspconfig').setup({
+			handlers = {
+				function(server_name)
+					local server = servers[server_name] or {}
+
+					server.capabilities = vim.tbl_deep_extend('force', capabilities, server.capabilities or {})
+					require('lspconfig')[server_name].setup(server)
+				end,
+			},
 		})
 	end,
 }
