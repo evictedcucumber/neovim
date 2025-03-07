@@ -57,15 +57,23 @@ M.setup = function()
     telescope.load_extension('ui-select')
     telescope.load_extension('undo')
 
-    vim.keymap.set('n', '<leader>sf', builtin.find_files)
-    vim.keymap.set('n', '<leader>sk', builtin.keymaps)
-    vim.keymap.set('n', '<leader>sg', builtin.live_grep)
-    vim.keymap.set('n', '<leader>sc', builtin.grep_string)
-    vim.keymap.set('n', '<leader>sh', builtin.help_tags)
-    vim.keymap.set('n', '<leader>/', function()
-        builtin.current_buffer_fuzzy_find(themes.get_dropdown())
-    end)
-    vim.keymap.set('n', '<leader>su', '<cmd>Telescope undo<CR>')
+    require('which-key').register({
+        s = {
+            name = 'search',
+            f = { builtin.find_files, 'Find Files' },
+            k = { builtin.keymaps, 'Search Keymaps' },
+            g = { builtin.live_grep, 'Live Grep' },
+            c = { builtin.grep_string, 'Grep String' },
+            h = { builtin.help_tags, 'Search Help Tags' },
+            u = { '<cmd>Telescope undo<CR>', 'Show Undo Tree' },
+        },
+        ['/'] = {
+            function()
+                builtin.current_buffer_fuzzy_find(themes.get_dropdown())
+            end,
+            'Fuzzy Search Buffer',
+        },
+    }, { prefix = '<leader>' })
 end
 
 return M

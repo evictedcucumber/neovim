@@ -6,20 +6,29 @@ M.setup = function()
     vim.opt.foldlevelstart = 99
     vim.opt.foldenable = true
 
-    require('ufo').setup({
+    local ufo = require('ufo')
+
+    ufo.setup({
         ---@diagnostic disable: unused-local
         provider_selector = function(_bufnr, _filetype, _buftype)
             return { 'lsp', 'indent' }
         end,
     })
 
-    vim.keymap.set('n', 'zR', require('ufo').openAllFolds)
-    vim.keymap.set('n', 'zM', require('ufo').closeAllFolds)
-    vim.keymap.set('n', 'K', function()
-        if not require('ufo').peekFoldedLinesUnderCursor() then
-            vim.lsp.buf.hover()
-        end
-    end)
+    require('which-key').register({
+        z = {
+            R = { ufo.openAllFolds, 'Open All Folds' },
+            M = { ufo.closeAllFolds, 'Close All Folds' },
+        },
+        K = {
+            function()
+                if not ufo.peekFoldedLinesUnderCursor() then
+                    vim.lsp.buf.hover()
+                end
+            end,
+            'View Hover Documentation',
+        },
+    }, { mode = 'n' })
 end
 
 return M

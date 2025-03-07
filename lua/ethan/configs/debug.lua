@@ -29,29 +29,17 @@ M.setup = function()
         },
     })
 
-    vim.keymap.set('n', '<leader>db', function()
-        dap.toggle_breakpoint()
-    end, { desc = '[D]ebug Toggle [B]reakpoint' })
-
-    vim.keymap.set('n', '<leader>dc', function()
-        dap.continue()
-    end, { desc = '[D]ebug [C]ontinue' })
-
-    vim.keymap.set('n', '<leader>di', function()
-        dap.step_into()
-    end, { desc = '[D]ebug Step [I]nto' })
-
-    vim.keymap.set('n', '<leader>do', function()
-        dap.step_over()
-    end, { desc = '[D]ebug Step [O]ver' })
-
-    vim.keymap.set('n', '<leader>dO', function()
-        dap.step_out()
-    end, { desc = '[D]ebug Step [O]ut' })
-
-    vim.keymap.set('n', '<leader>du', function()
-        dapui.toggle()
-    end, { desc = '[D]ebug Toggle [U]I' })
+    require('which-key').register({
+        B = { dap.toggle_breakpoint, 'Toggle Breakpoint' },
+        d = {
+            name = 'debug',
+            c = { dap.continue, 'Debug Continue' },
+            i = { dap.step_into, 'Debug Step Into' },
+            o = { dap.step_over, 'Debug Step Over' },
+            O = { dap.step_out, 'Debug Step Out' },
+            u = { dapui.toggle, 'Debug UI Toggle' },
+        },
+    })
 
     dap.listeners.after.event_initialized['dapui_config'] = dapui.open
     dap.listeners.before.event_terminated['dapui_config'] = dapui.close
