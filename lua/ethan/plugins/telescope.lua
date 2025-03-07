@@ -5,6 +5,7 @@ return {
         { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
         'nvim-telescope/telescope-ui-select.nvim',
     },
+    event = 'VimEnter',
     config = function()
         local telescope = require('telescope')
         local actions = require('telescope.actions')
@@ -44,8 +45,17 @@ return {
                         '!**/*.lock',
                     },
                 },
+                spell_suggest = {
+                    theme = 'cursor',
+                },
             },
             extensions = {
+                fzf = {
+                    fuzzy = true,
+                    override_generic_sorter = true,
+                    override_file_sorter = true,
+                    case_mode = 'smart_case',
+                },
                 ['ui-select'] = {
                     themes.get_dropdown(),
                 },
@@ -54,7 +64,6 @@ return {
 
         telescope.load_extension('fzf')
         telescope.load_extension('ui-select')
-        telescope.load_extension('undo')
 
         -- KEYMAPS
         local builtins = require('telescope.builtin')
