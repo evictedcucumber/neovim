@@ -13,9 +13,11 @@ return {
 			show_end_of_buffer = true,
 			term_colors = true,
 			integrations = {
+				markdown = true,
 				fidget = true,
 				cmp = true,
 				treesitter = true,
+				treesitter_context = true,
 				harpoon = true,
 				indent_blankline = {
 					enabled = true,
@@ -46,6 +48,7 @@ return {
 				telescope = true,
 				which_key = true,
 				lsp_trouble = true,
+				gitsigns = true,
 			},
 		})
 
