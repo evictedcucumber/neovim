@@ -8,8 +8,6 @@ M.setup = function()
         python = { 'mypy' },
         css = { 'stylelint' },
         json = { 'biomejs' },
-        dockerfile = { 'hadolint' },
-        yaml = { 'yamllint' },
     }
 
     local lint_augroup = vim.api.nvim_create_augroup('lint', { clear = true })
@@ -27,8 +25,6 @@ M.linters = {
     'mypy',
     'stylelint',
     'biome',
-    'hadolint',
-    'yamllint',
 }
 
 return M
