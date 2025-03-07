@@ -14,39 +14,63 @@ return {
         vim.api.nvim_create_autocmd('LspAttach', {
             group = require('ethan.util').create_custom_augroup('lsp_attach'),
             callback = function(event)
-                local map = function(lhs, rhs, desc)
-                    vim.keymap.set('n', lhs, rhs, { buffer = event.buf, desc = desc })
+                local function opts(desc)
+                    return { buffer = event.buf, desc = desc }
                 end
 
-                map('gd', '<cmd>Telescope lsp_definitions<CR>', 'Show LSP Definitions')
-                map('gr', '<cmd>Telescope lsp_references<CR>', 'Goto References')
-
-                map('<leader>rn', vim.lsp.buf.rename, 'Rename')
-                map('<leader>ca', vim.lsp.buf.code_action, 'Code Actions')
-                map('[d', vim.diagnostic.goto_prev, 'Goto Previous Diagnostic Message')
-                map(']d', vim.diagnostic.goto_next, 'Goto Next Diagnostic Message')
-                map('K', vim.lsp.buf.hover, 'Show Hover Documentation')
-
-                map(
-                    '<leader>tt',
-                    '<cmd>Trouble diagnostics toggle filter.buf=0<CR>',
-                    'Toggle Trouble'
+                vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts('Go to definition'))
+                vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, opts('Go to declaration'))
+                vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, opts('Go to implementation'))
+                vim.keymap.set('n', 'gr', vim.lsp.buf.references, opts('Go to references'))
+                vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, opts('Rename'))
+                vim.keymap.set(
+                    { 'n', 'v' },
+                    '<leader>ca',
+                    vim.lsp.buf.code_action,
+                    opts('Code Actions')
                 )
-                map('<leader>tT', '<cmd>Trouble diagnostics toggle<CR>', 'Toggle Trouble')
-                map('<leader>ts', '<cmd>Trouble symbols toggle<CR>', 'View Document Symbols')
-                map('<leader>tx', '<cmd>Trouble close<CR>', 'Trouble Close')
-                map(']t', '<cmd>Trouble next<CR>', 'Goto Next Trouble Item')
-                map('[t', '<cmd>Trouble prev<CR>', 'Goto Previous Trouble Item')
-
+                vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts('Show Hover Documentation'))
                 vim.keymap.set(
                     'i',
                     '<C-h>',
                     vim.lsp.buf.signature_help,
-                    { buffer = event.buf, desc = 'Show Signature Help' }
+                    opts('Show Signature Help')
+                )
+
+                vim.keymap.set(
+                    'n',
+                    '<leader>tt',
+                    '<cmd>Trouble diagnostics toggle filter.buf=0<CR>',
+                    opts('Toggle Trouble')
+                )
+                vim.keymap.set(
+                    'n',
+                    '<leader>tT',
+                    '<cmd>Trouble diagnostics toggle<CR>',
+                    opts('Toggle Trouble')
+                )
+                vim.keymap.set(
+                    'n',
+                    '<leader>ts',
+                    '<cmd>Trouble symbols toggle<CR>',
+                    opts('View Document Symbols')
+                )
+                vim.keymap.set('n', '<leader>tx', '<cmd>Trouble close<CR>', opts('Trouble Close'))
+                vim.keymap.set('n', ']t', '<cmd>Trouble next<CR>', opts('Goto Next Trouble Item'))
+                vim.keymap.set(
+                    'n',
+                    '[t',
+                    '<cmd>Trouble prev<CR>',
+                    opts('Goto Previous Trouble Item')
                 )
 
                 local client = vim.lsp.get_client_by_id(event.data.client_id)
-                if client and client.server_capabilities.documentHighlightProvider then
+
+                if not client then
+                    return
+                end
+
+                if client.server_capabilities.documentHighlightProvider then
                     vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {
                         group = require('ethan.util').create_custom_augroup('document_highlight'),
                         buffer = event.buf,
@@ -57,6 +81,19 @@ return {
                         group = require('ethan.util').create_custom_augroup('clear_references'),
                         buffer = event.buf,
                         callback = vim.lsp.buf.clear_references,
+                    })
+                end
+
+                if client.server_capabilities.inlayHintProvider then
+                    vim.lsp.inlay_hint.enable(true, { bufnr = event.buf })
+                end
+
+                if client.server_capabilities.codeLensProvider then
+                    vim.lsp.codelens.refresh()
+                    vim.api.nvim_create_autocmd({ 'BufEnter', 'CursorHold', 'InsertLeave' }, {
+                        group = require('ethan.util').create_custom_augroup('codelens_refresh'),
+                        buffer = event.buf,
+                        callback = vim.lsp.codelens.refresh,
                     })
                 end
             end,
