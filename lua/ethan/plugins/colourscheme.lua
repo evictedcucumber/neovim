@@ -9,7 +9,7 @@ return {
 				light = 'mocha',
 				dark = 'mocha',
 			},
-			transparent_background = false,
+			transparent_background = true,
 			show_end_of_buffer = true,
 			term_colors = true,
 			integrations = {
