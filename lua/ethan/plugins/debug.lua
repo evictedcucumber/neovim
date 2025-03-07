@@ -5,7 +5,6 @@ return {
 		'rcarriga/nvim-dap-ui',
 		'williamboman/mason.nvim',
 		'jay-babu/mason-nvim-dap.nvim',
-
 		'mfussenegger/nvim-dap-python',
 	},
 	config = function()
@@ -37,47 +36,29 @@ return {
 			},
 		})
 
-		require('which-key').register({
-			['<leader>d'] = {
-				name = '[D]ebug',
-				b = {
-					function()
-						dap.toggle_breakpoint()
-					end,
-					'[D]ebug [B]reakpoint',
-				},
-				c = {
-					function()
-						dap.continue()
-					end,
-					'[D]ebug [C]ontinue',
-				},
-				i = {
-					function()
-						dap.step_into()
-					end,
-					'[D]ebug Step [I]nto',
-				},
-				o = {
-					function()
-						dap.step_over()
-					end,
-					'[D]ebug Step [O]ver',
-				},
-				O = {
-					function()
-						dap.step_out()
-					end,
-					'[D]ebug Step [O]ut',
-				},
-				u = {
-					function()
-						dapui.toggle()
-					end,
-					'Toggle [D]ebug [U]I',
-				},
-			},
-		})
+		vim.keymap.set('n', '<leader>db', function()
+			dap.toggle_breakpoint()
+		end, { desc = '[D]ebug Toggle [B]reakpoint' })
+
+		vim.keymap.set('n', '<leader>dc', function()
+			dap.continue()
+		end, { desc = '[D]ebug [C]ontinue' })
+
+		vim.keymap.set('n', '<leader>di', function()
+			dap.step_into()
+		end, { desc = '[D]ebug Step [I]nto' })
+
+		vim.keymap.set('n', '<leader>do', function()
+			dap.step_over()
+		end, { desc = '[D]ebug Step [O]ver' })
+
+		vim.keymap.set('n', '<leader>dO', function()
+			dap.step_out()
+		end, { desc = '[D]ebug Step [O]ut' })
+
+		vim.keymap.set('n', '<leader>du', function()
+			dapui.toggle()
+		end, { desc = '[D]ebug Toggle [U]I' })
 
 		dap.listeners.after.event_initialized['dapui_config'] = dapui.open
 		dap.listeners.before.event_terminated['dapui_config'] = dapui.close

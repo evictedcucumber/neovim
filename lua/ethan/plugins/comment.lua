@@ -2,7 +2,9 @@ return {
 	'numToStr/Comment.nvim',
 	event = { 'BufReadPre', 'BufNewFile' },
 	config = function()
-		require('Comment').setup({
+		local comment = require('Comment')
+
+		comment.setup({
 			toggler = {
 				line = '<leader>cl',
 				block = '<leader>cb',
@@ -15,10 +17,5 @@ return {
 				extra = false,
 			},
 		})
-
-		require('which-key').register({
-			['<leader>cl'] = '[C]omment [L]ine',
-			['<leader>cb'] = '[C]omment [B]lock',
-		}, { mode = { 'n', 'v' } })
 	end,
 }

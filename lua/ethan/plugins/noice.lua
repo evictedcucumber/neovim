@@ -17,10 +17,7 @@ return {
 		},
 		lsp = {
 			progress = {
-				enabled = true,
-				view = 'mini',
-				format = 'lsp_progress',
-				format_done = 'lsp_progress_done',
+				enabled = false,
 			},
 		},
 	},

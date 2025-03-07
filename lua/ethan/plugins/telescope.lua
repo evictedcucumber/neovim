@@ -11,25 +11,20 @@ return {
 			end,
 		},
 		'nvim-telescope/telescope-ui-select.nvim',
-		'folke/which-key.nvim',
 	},
-	init = function()
-		local builtin = require('telescope.builtin')
-
-		require('which-key').register({
-			['<leader>'] = {
-				s = {
-					f = { builtin.find_files, '[S]earch [F]iles' },
-					k = { builtin.keymaps, '[S]earch [K]eymaps' },
-					g = { builtin.live_grep, 'Live [G]rep' },
-					c = { builtin.grep_string, 'String Under [C]ursor' },
-				},
-			},
-		}, { mode = 'n' })
-	end,
 	config = function()
 		local telescope = require('telescope')
 		local actions = require('telescope.actions')
+		local transform_mod = require('telescope.actions.mt').transform_mod
+
+		local trouble = require('trouble')
+		local trouble_telescope = require('trouble.providers.telescope')
+
+		local custom_actions = transform_mod({
+			open_trouble_qflist = function()
+				trouble.toggle('quickfix')
+			end,
+		})
 
 		telescope.setup({
 			defaults = {
@@ -41,6 +36,8 @@ return {
 					i = {
 						['<C-k>'] = actions.move_selection_previous,
 						['<C-j>'] = actions.move_selection_next,
+						['<C-q>'] = actions.send_selected_to_qflist + custom_actions.open_trouble_qflist,
+						['<C-t>'] = trouble_telescope.smart_open_with_trouble,
 					},
 				},
 			},
@@ -58,5 +55,13 @@ return {
 
 		telescope.load_extension('fzf')
 		telescope.load_extension('ui-select')
+
+		local builtin = require('telescope.builtin')
+
+		vim.keymap.set('n', '<leader>sf', builtin.find_files)
+		vim.keymap.set('n', '<leader>sk', builtin.keymaps)
+		vim.keymap.set('n', '<leader>sg', builtin.live_grep)
+		vim.keymap.set('n', '<leader>sc', builtin.grep_string)
+		vim.keymap.set('n', '<leader>sh', builtin.help_tags)
 	end,
 }
