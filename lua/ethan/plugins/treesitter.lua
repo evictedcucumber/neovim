@@ -7,6 +7,7 @@ return {
         },
     },
     build = ':TSUpdate',
+    main = 'nvim-treesitter.configs',
     event = { 'BufReadPost', 'BufNewFile' },
     opts = require('ethan.plugins.opts.treesitter'),
 }
