@@ -8,6 +8,7 @@ M.opts = {
         tex = { 'latexindent' },
         css = { 'prettierd' },
         json = { 'prettierd' },
+        yaml = { 'prettierd' },
         ['_'] = { 'trim_whitespace' },
     },
     format_on_save = {

@@ -33,6 +33,12 @@ M.servers = {
     jsonls = {
         filetypes = { 'json' },
     },
+    dockerls = {
+        filetypes = { 'dockerfile' },
+    },
+    docker_compose_language_service = {
+        filetypes = { 'yaml' },
+    },
 }
 
 M.setup = function()
