@@ -5,4 +5,5 @@ return {
     { 'lukas-reineke/indent-blankline.nvim', main = 'ibl', opts = {} },
     'szw/vim-maximizer',
     'RRethy/vim-illuminate',
+    'tpope/vim-repeat',
 }
