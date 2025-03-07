@@ -46,6 +46,7 @@ M.opts = {
         which_key = true,
         lsp_trouble = true,
         gitsigns = true,
+        leap = true,
     },
 }
 
