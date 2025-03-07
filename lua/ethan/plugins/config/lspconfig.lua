@@ -1,6 +1,6 @@
 return function()
     vim.api.nvim_create_autocmd('LspAttach', {
-        group = require('ethan.util').create_custom_augroup('lspconfig'),
+        group = require('ethan.util').create_custom_augroup('lsp_attach'),
         callback = function(event)
             local map = function(lhs, rhs, desc)
                 vim.keymap.set('n', lhs, rhs, { buffer = event.buf, desc = desc })
@@ -46,6 +46,72 @@ return function()
         end,
     })
 
+    local capabilities = vim.tbl_deep_extend(
+        'force',
+        {},
+        vim.lsp.protocol.make_client_capabilities(),
+        require('cmp_nvim_lsp').default_capabilities()
+    )
+
+    local lspconfig = require('lspconfig')
+
+    lspconfig.lua_ls.setup({
+        capabilities = capabilities,
+        settings = {
+            Lua = {
+                diagnostics = {
+                    globals = { 'vim' },
+                },
+                workspace = {
+                    library = {
+                        [vim.fn.expand('$VIMRUNTIME/lua')] = true,
+                        [vim.fn.stdpath('config') .. '/lua'] = true,
+                    },
+                },
+                completion = {
+                    callSnippet = 'Replace',
+                },
+            },
+        },
+    })
+
+    lspconfig.pyright.setup({
+        capabilities = capabilities,
+        settings = {
+            pyright = {
+                disableOrganizeImports = true,
+            },
+            python = {
+                analysis = {
+                    ignore = { '*' },
+                },
+            },
+        },
+    })
+
+    lspconfig.ruff_lsp.setup({
+        capabilities = capabilities,
+        on_attach = function(client, _)
+            client.server_capabilities.hoverProvider = false
+        end,
+    })
+
+    lspconfig.tsserver.setup({
+        capabilities = capabilities,
+    })
+
+    lspconfig.eslint.setup({
+        capabilities = capabilities,
+    })
+
+    lspconfig.tailwindcss.setup({
+        capabilities = capabilities,
+    })
+
+    lspconfig.stylelint_lsp.setup({
+        capabilities = capabilities,
+    })
+
     require('trouble').setup({})
 
     require('fidget').setup({
@@ -61,67 +127,7 @@ return function()
         },
     })
 
-    local capabilities = vim.tbl_deep_extend(
-        'force',
-        {},
-        vim.lsp.protocol.make_client_capabilities(),
-        require('cmp_nvim_lsp').default_capabilities()
-    )
-
-    local servers = {
-        lua_ls = {
-            filetypes = { 'lua' },
-            options = {
-                Lua = {
-                    diagnostics = {
-                        globals = { 'vim' },
-                    },
-                    workspace = {
-                        library = {
-                            [vim.fn.expand('$VIMRUNTIME/lua')] = true,
-                            [vim.fn.stdpath('config') .. '/lua'] = true,
-                        },
-                    },
-                    completion = {
-                        callSnippet = 'Replace',
-                    },
-                },
-            },
-        },
-        pyright = {
-            filetypes = { 'python' },
-        },
-        ruff_lsp = {
-            filetypes = { 'python' },
-        },
-        tsserver = {
-            filetypes = { 'javascript', 'typescript', 'javascriptreact', 'typescriptreact' },
-        },
-        tailwindcss = {
-            filetypes = {
-                'html',
-                'css',
-                'javascript',
-                'typescript',
-                'javascriptreact',
-                'typescriptreact',
-            },
-        },
-    }
-
-    require('mason-lspconfig').setup({
-        ensure_installed = vim.tbl_keys(servers),
-        handlers = {
-            function(server_name)
-                local server_config = servers[server_name] or {}
-
-                server_config.capabilities = capabilities
-                require('lspconfig')[server_name].setup(server_config)
-            end,
-        },
-    })
-
-    local signs = { Error = ' ', Warn = ' ', Hint = '󰠠 ', Info = ' ' }
+    local signs = { Error = '', Warn = ' ', Hint = '󰠠 ', Info = ' ' }
     for type, icon in pairs(signs) do
         local hl = 'DiagnosticSign' .. type
         vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = '' })

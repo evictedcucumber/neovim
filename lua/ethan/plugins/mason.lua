@@ -1,11 +1,13 @@
 return {
-    'williamboman/mason.nvim',
-    dependencies = {
-        {
-            'WhoIsSethDaniel/mason-tool-installer.nvim',
-            opts = require('ethan.plugins.opts.mason-tool-installer'),
-        },
+    {
+        'williamboman/mason.nvim',
+        lazy = false,
+        opts = require('ethan.plugins.opts.mason'),
     },
-    lazy = false,
-    opts = require('ethan.plugins.opts.mason'),
+    {
+        'WhoIsSethDaniel/mason-tool-installer.nvim',
+        dependencies = { 'williamboman/mason.nvim' },
+        lazy = false,
+        opts = require('ethan.plugins.opts.mason-tool-installer'),
+    },
 }

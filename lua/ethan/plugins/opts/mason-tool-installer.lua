@@ -1,17 +1,21 @@
 return {
     ensure_installed = {
+        -- LSPs
+        'eslint-lsp',
+        'lua-language-server',
+        'pyright',
+        'ruff-lsp',
+        'stylelint-lsp',
+        'tailwindcss-language-server',
+        'typescript-language-server',
         -- Formatters
-        'stylua',
-        'isort',
-        'black',
         'prettierd',
+        'stylua',
         -- Linters
         'luacheck',
         'mypy',
-        'eslint_d',
-        'stylelint',
     },
     auto_update = true,
     run_on_start = true,
-    start_delay = 5000,
+    start_delay = 3000,
 }

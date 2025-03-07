@@ -5,16 +5,13 @@ return function()
         sources = {
             -- Formatters
             null_ls.builtins.formatting.stylua,
-            null_ls.builtins.formatting.isort,
-            null_ls.builtins.formatting.black,
             null_ls.builtins.formatting.prettierd,
             require('none-ls.formatting.trim_whitespace'),
             -- Linters
-            null_ls.builtins.diagnostics.stylelint,
             null_ls.builtins.diagnostics.mypy.with({
                 extra_args = {
                     '--python-executable',
-                    function()
+                    (function()
                         local path = os.getenv('VIRTUAL_ENV')
                             or os.getenv('CONDA_PREFIX')
                             or vim.fn.getcwd()
@@ -23,11 +20,10 @@ return function()
                             path = '/usr/bin/python3'
                         end
                         return path
-                    end,
+                    end)(),
                 },
             }),
             require('none-ls-luacheck.diagnostics.luacheck'),
-            require('none-ls.diagnostics.eslint_d'),
         },
         on_attach = function(client, bufnr)
             if client.supports_method('textDocument/formatting') then
