@@ -86,6 +86,9 @@ return function()
         pyright = {
             filetypes = { 'python' },
         },
+        ruff_lsp = {
+            filetypes = { 'python' },
+        },
     }
 
     require('mason-lspconfig').setup({
