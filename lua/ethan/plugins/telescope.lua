@@ -4,7 +4,6 @@ return {
         'nvim-lua/plenary.nvim',
         { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
         'nvim-telescope/telescope-ui-select.nvim',
-        'debugloop/telescope-undo.nvim',
     },
     keys = {
         { '<leader>sf', '<cmd>Telescope find_files<CR>', desc = 'Find Files' },
