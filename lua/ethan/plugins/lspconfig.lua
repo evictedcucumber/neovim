@@ -91,49 +91,6 @@ return {
             },
         })
 
-        lspconfig.pyright.setup({
-            capabilities = capabilities,
-            settings = {
-                pyright = {
-                    disableOrganizeImports = true,
-                },
-                python = {
-                    analysis = {
-                        ignore = { '*' },
-                    },
-                },
-            },
-        })
-
-        lspconfig.ruff_lsp.setup({
-            capabilities = capabilities,
-            on_attach = function(client, _)
-                client.server_capabilities.hoverProvider = false
-            end,
-        })
-
-        lspconfig.ts_ls.setup({
-            capabilities = capabilities,
-        })
-
-        lspconfig.eslint.setup({
-            capabilities = capabilities,
-        })
-
-        lspconfig.tailwindcss.setup({
-            capabilities = capabilities,
-        })
-
-        lspconfig.stylelint_lsp.setup({
-            capabilities = capabilities,
-        })
-
-        lspconfig.rust_analyzer.setup({
-            capabilities = capabilities,
-            filetypes = { 'rust' },
-            root_dir = require('lspconfig/util').root_pattern('Cargo.toml'),
-        })
-
         require('trouble').setup({})
 
         require('fidget').setup({
