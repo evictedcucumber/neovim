@@ -10,8 +10,7 @@ return function()
             show_hidden = true,
             is_always_hidden = function(name, _)
                 return vim.tbl_contains({ '.git', '.trash', '.venv' }, name)
-                    or vim.endswith(name, 'cache')
-                    or vim.endswith(name, 'lock')
+                    or string.find(name, 'cache')
             end,
             sort = {
                 { 'type', 'asc' },
