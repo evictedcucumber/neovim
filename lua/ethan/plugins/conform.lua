@@ -1,9 +1,6 @@
 return {
 	'stevearc/conform.nvim',
-	dependencies = {
-		'williamboman/mason.nvim',
-		'WhoIsSethDaniel/mason-tool-installer.nvim',
-	},
+
 	event = { 'BufReadPre', 'BufNewFile' },
 	config = function()
 		local conform = require('conform')
@@ -12,6 +9,7 @@ return {
 			formatters_by_ft = {
 				lua = { 'stylua' },
 				python = { 'black', 'isort' },
+				json = { 'biome' },
 			},
 			format_on_save = {
 				lsp_fallback = true,
