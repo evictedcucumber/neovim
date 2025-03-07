@@ -1,101 +1,4 @@
 return function()
-    require('trouble').setup({})
-
-    require('fidget').setup({
-        notification = {
-            window = {
-                winblend = 0,
-            },
-        },
-    })
-
-    require('mason').setup({
-        ui = {
-            icons = {
-                package_installed = '✓',
-                package_pending = '➜',
-                package_uninstalled = '✗',
-            },
-        },
-    })
-
-    require('mason-tool-installer').setup({
-        ensure_installed = {
-            -- Formatters
-            'stylua',
-            'isort',
-            'black',
-            'latexindent',
-            'prettierd',
-            -- Linters
-            'luacheck',
-            'mypy',
-            'stylelint',
-            'biome',
-        },
-        auto_update = false,
-        run_on_start = true,
-        start_delay = 5000,
-    })
-
-    local capabilities = vim.tbl_deep_extend(
-        'force',
-        vim.lsp.protocol.make_client_capabilities(),
-        require('cmp_nvim_lsp').default_capabilities()
-    )
-    local lspconfig = require('lspconfig')
-
-    local servers = {
-        lua_ls = {
-            filetypes = { 'lua' },
-            options = {
-                Lua = {
-                    diagnostics = {
-                        globals = { 'vim' },
-                    },
-                    workspace = {
-                        library = {
-                            [vim.fn.expand('$VIMRUNTIME/lua')] = true,
-                            [vim.fn.stdpath('config') .. '/lua'] = true,
-                        },
-                    },
-                    completion = {
-                        callSnippet = 'Replace',
-                    },
-                },
-            },
-        },
-        pyright = {
-            filetypes = { 'python' },
-        },
-        texlab = {
-            filetypes = { 'tex' },
-        },
-        cssls = {
-            filetypes = { 'css' },
-        },
-    }
-
-    require('mason-lspconfig').setup({
-        ensure_installed = vim.tbl_keys(servers),
-        handlers = {
-            function(server_name)
-                local server_config = servers[server_name] or {}
-
-                server_config.capabilities = capabilities
-                lspconfig[server_name].setup(server_config)
-            end,
-        },
-    })
-
-    local signs = { Error = ' ', Warn = ' ', Hint = '󰠠 ', Info = ' ' }
-    for type, icon in pairs(signs) do
-        local hl = 'DiagnosticSign' .. type
-        vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = '' })
-    end
-
-    vim.diagnostic.config({ underline = true })
-
     vim.api.nvim_create_autocmd('LspAttach', {
         group = require('ethan.util').create_custom_augroup('lspconfig'),
         callback = function(event)
@@ -142,4 +45,66 @@ return function()
             end
         end,
     })
+
+    require('trouble').setup({})
+
+    require('fidget').setup({
+        notification = {
+            window = {
+                winblend = 0,
+            },
+        },
+    })
+
+    local capabilities = vim.tbl_deep_extend(
+        'force',
+        {},
+        vim.lsp.protocol.make_client_capabilities(),
+        require('cmp_nvim_lsp').default_capabilities()
+    )
+
+    local servers = {
+        lua_ls = {
+            filetypes = { 'lua' },
+            options = {
+                Lua = {
+                    diagnostics = {
+                        globals = { 'vim' },
+                    },
+                    workspace = {
+                        library = {
+                            [vim.fn.expand('$VIMRUNTIME/lua')] = true,
+                            [vim.fn.stdpath('config') .. '/lua'] = true,
+                        },
+                    },
+                    completion = {
+                        callSnippet = 'Replace',
+                    },
+                },
+            },
+        },
+        pyright = {
+            filetypes = { 'python' },
+        },
+    }
+
+    require('mason-lspconfig').setup({
+        ensure_installed = vim.tbl_keys(servers),
+        handlers = {
+            function(server_name)
+                local server_config = servers[server_name] or {}
+
+                server_config.capabilities = capabilities
+                require('lspconfig')[server_name].setup(server_config)
+            end,
+        },
+    })
+
+    local signs = { Error = ' ', Warn = ' ', Hint = '󰠠 ', Info = ' ' }
+    for type, icon in pairs(signs) do
+        local hl = 'DiagnosticSign' .. type
+        vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = '' })
+    end
+
+    vim.diagnostic.config({ underline = true })
 end
