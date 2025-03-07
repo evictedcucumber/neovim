@@ -1,10 +1,10 @@
 return {
-	"nvim-treesitter/nvim-treesitter",
-	dependencies = { "nvim-treesitter/nvim-treesitter-textobjects" },
-	event = "VeryLazy",
-	build = ":TSUpdate",
+	'nvim-treesitter/nvim-treesitter',
+	dependencies = { 'nvim-treesitter/nvim-treesitter-textobjects' },
+	event = 'VeryLazy',
+	build = ':TSUpdate',
 	config = function()
-		require("nvim-treesitter.configs").setup({
+		require('nvim-treesitter.configs').setup({
 			auto_install = true,
 			highlight = {
 				enable = true,
@@ -13,9 +13,9 @@ return {
 				enable = true,
 			},
 			ensure_installed = {
-				"lua",
-				"python",
-				"toml",
+				'lua',
+				'python',
+				'toml',
 			},
 		})
 	end,

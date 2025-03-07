@@ -1,10 +1,10 @@
 return {
-	"catppuccin/nvim",
-	name = "catppuccin",
+	'catppuccin/nvim',
+	name = 'catppuccin',
 	priority = 1000,
 	config = function()
-		require("catppuccin").setup({
-			flavour = "frappe",
+		require('catppuccin').setup({
+			flavour = 'frappe',
 			transparent_background = true,
 			show_end_of_buffer = true,
 			term_colors = true,
@@ -14,13 +14,13 @@ return {
 				harpoon = true,
 				indent_blankline = {
 					enabled = true,
-					scope_color = "text",
+					scope_color = 'text',
 					colored_indent_levels = false,
 				},
 				mason = true,
 				mini = {
 					enabled = true,
-					indendscope_color = "text",
+					indendscope_color = 'text',
 				},
 				noice = true,
 				dap = true,
@@ -28,16 +28,16 @@ return {
 				native_lsp = {
 					enabled = true,
 					virtual_text = {
-						errors = { "italic" },
-						hints = { "italic" },
-						warnings = { "italic" },
-						information = { "italic" },
+						errors = { 'italic' },
+						hints = { 'italic' },
+						warnings = { 'italic' },
+						information = { 'italic' },
 					},
 					underlines = {
-						errors = { "underline" },
-						hints = { "underline" },
-						warnings = { "underline" },
-						information = { "underline" },
+						errors = { 'underline' },
+						hints = { 'underline' },
+						warnings = { 'underline' },
+						information = { 'underline' },
 					},
 					inlay_hints = {
 						background = true,
@@ -50,6 +50,6 @@ return {
 			},
 		})
 
-		vim.cmd.colorscheme("catppuccin")
+		vim.cmd.colorscheme('catppuccin')
 	end,
 }

@@ -1,6 +1,6 @@
-vim.opt.mouse = ""
+vim.opt.mouse = ''
 
-vim.opt.clipboard:append({ "unnamed", "unnamedplus" })
+vim.opt.clipboard:append({ 'unnamed', 'unnamedplus' })
 
 vim.opt.nu = true
 vim.opt.relativenumber = true
@@ -20,8 +20,8 @@ vim.opt.incsearch = true
 vim.opt.termguicolors = true
 
 vim.opt.scrolloff = 8
-vim.opt.signcolumn = "yes"
+vim.opt.signcolumn = 'yes'
 
 vim.opt.updatetime = 50
 
-vim.opt.colorcolumn = "100"
+vim.opt.colorcolumn = '100'

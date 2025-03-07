@@ -1,8 +1,8 @@
 return {
-	"NvChad/nvim-colorizer.lua",
+	'NvChad/nvim-colorizer.lua',
 	opts = {
 		user_default_options = {
-			mode = "foreground",
+			mode = 'foreground',
 			names = false,
 		},
 	},
