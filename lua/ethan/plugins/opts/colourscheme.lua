@@ -14,15 +14,10 @@ return {
         treesitter = true,
         treesitter_context = true,
         harpoon = true,
-        indent_blankline = {
-            enabled = true,
-            scope_color = 'text',
-            colored_indent_levels = false,
-        },
         mason = true,
         mini = {
             enabled = true,
-            indendscope_color = 'text',
+            indentscope_color = 'surface1',
         },
         noice = true,
         dap = true,
