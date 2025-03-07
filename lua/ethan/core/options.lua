@@ -1,5 +1,7 @@
-vim.opt.relativenumber = true
+vim.g.have_nerd_font = true
+
 vim.opt.number = true
+vim.opt.relativenumber = true
 
 vim.opt.tabstop = 4
 vim.opt.softtabstop = 4
@@ -22,7 +24,7 @@ vim.opt.signcolumn = 'yes'
 
 vim.opt.backspace = 'indent,eol,start'
 
-vim.opt.clipboard:append('unnamedplus')
+vim.opt.clipboard = 'unnamedplus'
 
 vim.opt.splitright = true
 vim.opt.splitbelow = true
@@ -33,6 +35,14 @@ vim.opt.mouse = 'a'
 
 vim.opt.list = true
 vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
+
+vim.opt.breakindent = true
+
+vim.opt.undofile = true
+
+vim.opt.inccommand = 'split'
+
+vim.opt.scrolloff = 10
 
 vim.api.nvim_create_autocmd('TextYankPost', {
 	desc = 'Highlight when yanking (copying) text',
