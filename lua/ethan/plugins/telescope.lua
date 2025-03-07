@@ -5,31 +5,10 @@ return {
         { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
         'nvim-telescope/telescope-ui-select.nvim',
     },
-    keys = {
-        { '<leader>sf', '<cmd>Telescope find_files<CR>', desc = 'Find Files' },
-        { '<leader>sk', '<cmd>Telescope keymaps<CR>', desc = 'Search Keymaps' },
-        { '<leader>sg', '<cmd>Telescope live_grep<CR>', desc = 'Live Grep' },
-        { '<leader>sc', '<cmd>Telescope grep_string<CR>', desc = 'Grep String' },
-        { '<leader>sh', '<cmd>Telescope help_tags<CR>', desc = 'Find Help Tags' },
-        { '<leader>su', '<cmd>Telescope undo<CR>', desc = 'Show Undo Tree' },
-        { '<leader>/', '<cmd>Telescope current_buffer_fuzzy_find', desc = 'Fuzzy Search Buffer' },
-        { 'gd' },
-        { 'gr' },
-    },
     config = function()
         local telescope = require('telescope')
         local actions = require('telescope.actions')
         local themes = require('telescope.themes')
-        local transform_mod = require('telescope.actions.mt').transform_mod
-
-        local trouble = require('trouble')
-        local trouble_telescope = require('trouble.sources.telescope')
-
-        local custom_actions = transform_mod({
-            open_trouble_qflist = function()
-                trouble.toggle('quickfix')
-            end,
-        })
 
         telescope.setup({
             defaults = {
@@ -41,9 +20,6 @@ return {
                     i = {
                         ['<C-k>'] = actions.move_selection_previous,
                         ['<C-j>'] = actions.move_selection_next,
-                        ['<C-q>'] = actions.send_selected_to_qflist
-                            + custom_actions.open_trouble_qflist,
-                        ['<C-t>'] = trouble_telescope.open,
                     },
                 },
             },
@@ -79,5 +55,50 @@ return {
         telescope.load_extension('fzf')
         telescope.load_extension('ui-select')
         telescope.load_extension('undo')
+
+        -- KEYMAPS
+        local builtins = require('telescope.builtin')
+
+        local function is_git_repo()
+            vim.fn.system('git rev-parse --is-inside-work-tree')
+            return vim.v.shell_error == 0
+        end
+
+        local function get_git_cwd()
+            local cwd = vim.fn.system('git rev-parse --show-toplevel')
+            return vim.fn.trim(cwd, '\n', 2)
+        end
+
+        local function find_files_from_project_git_root()
+            local opts = {}
+            if is_git_repo() then
+                opts = {
+                    cwd = get_git_cwd(),
+                }
+            end
+            builtins.find_files(opts)
+        end
+
+        local function live_grep_from_project_git_root()
+            local opts = {}
+            if is_git_repo() then
+                opts = {
+                    cwd = get_git_cwd(),
+                }
+            end
+            builtins.live_grep(opts)
+        end
+
+        vim.keymap.set('n', '<leader>sf', find_files_from_project_git_root, { desc = 'Find Files' })
+        vim.keymap.set('n', '<leader>sg', live_grep_from_project_git_root, { desc = 'Live Grep' })
+        vim.keymap.set('n', '<leader>ss', builtins.spell_suggest, { desc = 'Spell Suggest' })
+        vim.keymap.set('n', '<leader>sk', builtins.keymaps, { desc = 'Search Keymaps' })
+        vim.keymap.set('n', '<leader>sb', builtins.buffers, { desc = 'Search Buffers' })
+        vim.keymap.set(
+            'n',
+            '<leader>/',
+            builtins.current_buffer_fuzzy_find,
+            { desc = 'Fuzzy Search Buffer' }
+        )
     end,
 }
