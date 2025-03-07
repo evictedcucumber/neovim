@@ -1,27 +1,50 @@
 return {
-    'folke/tokyonight.nvim',
-    name = 'tokyonight',
+    'catppuccin/nvim',
+    name = 'catppuccin',
     lazy = false,
     priority = 1000,
     opts = {
-        style = 'night',
-        on_highlights = function(hl, c)
-            hl.SpellBad = {
-                sp = c.blue0,
-                undercurl = true,
-            }
-            hl.SpellCap = {
-                sp = c.blue0,
-                undercurl = true,
-            }
-            hl.SpellRare = {
-                sp = c.blue0,
-                undercurl = true,
-            }
-            hl.SpellLocal = {
-                sp = c.blue0,
-                undercurl = true,
-            }
-        end,
+        flavour = 'mocha',
+        background = {
+            light = 'mocha',
+            dark = 'mocha',
+        },
+        transparent_background = true,
+        show_end_of_buffer = true,
+        term_colors = true,
+        integrations = {
+            markdown = true,
+            fidget = true,
+            cmp = true,
+            treesitter = true,
+            treesitter_context = true,
+            harpoon = true,
+            mason = true,
+            mini = {
+                enabled = true,
+                indentscope_color = 'surface1',
+            },
+            noice = true,
+            dap = true,
+            dap_ui = true,
+            native_lsp = {
+                enabled = true,
+                underlines = {
+                    errors = { 'undercurl' },
+                    hints = { 'undercurl' },
+                    warnings = { 'undercurl' },
+                    information = { 'undercurl' },
+                },
+                inlay_hints = {
+                    background = true,
+                },
+            },
+            notify = true,
+            telescope = true,
+            which_key = true,
+            lsp_trouble = true,
+            gitsigns = true,
+            flash = true,
+        },
     },
 }
