@@ -4,9 +4,11 @@ return {
         'stylua',
         'isort',
         'black',
+        'prettierd',
         -- Linters
         'luacheck',
         'mypy',
+        'eslint_d',
     },
     auto_update = true,
     run_on_start = true,

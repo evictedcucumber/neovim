@@ -89,6 +89,19 @@ return function()
         ruff_lsp = {
             filetypes = { 'python' },
         },
+        tsserver = {
+            filetypes = { 'javascript', 'typescript', 'javascriptreact', 'typescriptreact' },
+        },
+        tailwindcss = {
+            filetypes = {
+                'html',
+                'css',
+                'javascript',
+                'typescript',
+                'javascriptreact',
+                'typescriptreact',
+            },
+        },
     }
 
     require('mason-lspconfig').setup({
