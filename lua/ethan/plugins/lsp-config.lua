@@ -117,6 +117,9 @@ return {
 			pyright = {
 				filetypes = { 'python' },
 			},
+			texlab = {
+				filetypes = { 'tex' },
+			},
 		}
 
 		require('mason').setup({

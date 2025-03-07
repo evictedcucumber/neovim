@@ -51,6 +51,7 @@ return {
 					require('telescope.themes').get_dropdown(),
 				},
 			},
+			file_ignore_patterns = { '.git/' },
 		})
 
 		telescope.load_extension('fzf')

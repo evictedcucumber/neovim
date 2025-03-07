@@ -7,7 +7,7 @@ return {
 			formatters_by_ft = {
 				lua = { 'stylua' },
 				python = { 'isort', 'black' },
-				json = { 'biome' },
+				tex = { 'latexindent' },
 				['*'] = { 'codespell' },
 				['_'] = { 'trim_whitespace' },
 			},
