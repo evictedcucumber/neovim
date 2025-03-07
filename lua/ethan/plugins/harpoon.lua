@@ -1,7 +1,7 @@
 return {
 	'ThePrimeagen/harpoon',
 	branch = 'harpoon2',
-	dependecies = {
+	dependencies = {
 		'nvim-lua/plenary.nvim',
 	},
 	config = function()
@@ -10,7 +10,7 @@ return {
 		harpoon:setup()
 
 		vim.keymap.set('n', '<leader>a', function()
-			harpoon:list():append()
+			harpoon:list():add()
 		end, { desc = 'Harpoon [A]ppend' })
 
 		vim.keymap.set('n', '<leader>e', function()
